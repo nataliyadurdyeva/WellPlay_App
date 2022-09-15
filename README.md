@@ -36,6 +36,9 @@ The App is going to be on AppStore Shortly available for free download.
 - Set up and search withing distance radius (kilometers or miles)
 - Advanced filtering by preffered types of sports
 - Create and chat in Group Chats
+- Read/Unread status for messages
+- Showing if the user is online/offline
+- Sending images via chat
 
 ### License
 
