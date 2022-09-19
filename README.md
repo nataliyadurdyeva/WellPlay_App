@@ -26,7 +26,8 @@ Create an account with: emails, password, profile photo, name, age, bio, preffer
 
 Browse other users in your city and use Search Bar to filter users by their preferred list of sports
 
-![WellPlayGitHub_create_profile](https://user-images.githubusercontent.com/107269455/191108041-0c75586e-fb4d-477d-b039-5a424931d054.gif)
+![WellPlayBrowseSearch](https://user-images.githubusercontent.com/107269455/191108200-de4a9f24-c667-41c8-8f01-631564aff7a4.gif)
+
 
 Message the selected user to discuss logistics of meeting up
 
