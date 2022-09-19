@@ -28,7 +28,7 @@ Browse other users in your city and use Search Bar to filter users by their pref
 
 Message the selected user to discuss logistics of meeting up
 
-![gitHubReadme_messaging](https://user-images.githubusercontent.com/107269455/191101057-5233bdde-77b9-4672-8b21-871899905e29.gif)
+![gitHubReadme_sendingMessages](https://user-images.githubusercontent.com/107269455/191101583-14944d74-563a-4a1a-a3a9-6fd1d206f5f4.gif)
 
 ### Setup/Installation
 
