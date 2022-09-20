@@ -42,7 +42,7 @@ class AppViewModel: NSObject, ObservableObject {
         userSession = Auth.auth().currentUser
         fetchUser()
       
-//        fetchRecentMessages()
+     fetchRecentMessage()
     }
     
     func sendMessage(text: String, reciever: User?) {
@@ -127,7 +127,7 @@ class AppViewModel: NSObject, ObservableObject {
 
     }
     
-    func fetchRecentMessage(message: Message?) {
+    func fetchRecentMessage() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
 
 

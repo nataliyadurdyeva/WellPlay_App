@@ -15,7 +15,7 @@ struct ChatLogView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var ChatViewIsActive: Bool = true
     
-    let reciever: User?
+    var reciever: User?
     @State var messages: Message?
     
     @State private var text: String = ""

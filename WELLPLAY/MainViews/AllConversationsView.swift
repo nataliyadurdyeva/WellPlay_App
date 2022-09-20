@@ -18,6 +18,10 @@ struct AllConversationsView: View {
     @State private var recieverUserName = ""
     @State private var senderUserName = ""
     @State var shouldShowLogOutOptions = false
+    @State var reciever: User?
+    init() {
+        
+    }
     
     var body: some View {
         NavigationView {
@@ -35,10 +39,13 @@ struct AllConversationsView: View {
 //                    }
                     messagesView
                     
-                  Spacer()
-                    Spacer()
-                    Spacer()
-                }.navigationBarTitleDisplayMode(.inline)
+                    NavigationLink("", isActive: $ChatViewIsActive) {
+                        ChatLogView(reciever: reciever)
+                    }
+                }
+//                .overlay(
+//                    newMessageButton, alignment: .bottom)
+                .navigationBarTitleDisplayMode(.inline)
                
                 
             }
@@ -60,11 +67,17 @@ struct AllConversationsView: View {
             
             ForEach(viewModel.messages, id: \.self)
             { message in
-                let selectedUser: User? = {
-                    return viewModel.users.first(where: {
-                        $0.id == message.toId
-                    })
-                }()
+                VStack {
+                    Button {
+                        let selectedUser: User? = {
+                            return viewModel.users.first(where: {
+                                $0.id == message.toId
+                            })
+                        }()
+                        self.reciever = selectedUser
+                        self.ChatViewIsActive.toggle()
+                    } label:{
+ 
                 Divider()
                     .padding(.vertical, 8)
 
@@ -99,29 +112,28 @@ struct AllConversationsView: View {
                                 .foregroundColor(Color(.lightGray))
                         }
                         
-                        NavigationLink(destination: ChatLogView(reciever: selectedUser)){
+//                        NavigationLink(destination: ChatLogView(reciever: selectedUser)){
                             Text(message.text)
                          
                                 .font(.system(size: 16))
                                 .foregroundColor(Color(.lightGray))
-                        }
+                        
                     }
                 } .offset(x: 30)
           
             }
+            }
+            }
             
-            
-            
-        }.onAppear() {
-            self.viewModel.fetchRecentMessage(message: messages)
+        }
+//        .onAppear() {
+//            self.viewModel.fetchRecentMessage(message: messages)
          
         }
 //        .navigationBarTitleDisplayMode(.inline)
 //        .background(Color("DarkBlue"))
         
-    }
-    
-    
+
     private var customNavBar: some View {
 
             
@@ -178,4 +190,86 @@ struct AllConversationsView: View {
         }
     
     }
+    
+//    @State var shouldShowNewMessageScreen = false
+    
+//    private var newMessageButton: some View {
+//        Button {
+//            shouldShowNewMessageScreen.toggle()
+//        } label: {
+//            HStack {
+//                Spacer()
+//                Text("+ New Message")
+//                    .font(.system(size: 16, weight: .bold))
+//                Spacer()
+//            }
+//            .foregroundColor(.white)
+//            .padding(.vertical)
+//                .background(Color.blue)
+//                .cornerRadius(32)
+//                .padding(.horizontal)
+//                .shadow(radius: 15)
+//        }
+//        .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
+//            CreateNewMessageView(reciever: { user in
+//                print(user.userName)
+//
+//                self.viewModel.reciever = user
+//
+//            })
+//        }
+//    }
+    
+   
+    
 }
+
+//struct CreateNewMessageView: View {
+//
+//    let reciever: (User) -> ()
+//
+//    @Environment(\.presentationMode) var presentationMode
+//
+//    @EnvironmentObject private var vm: AppViewModel
+//
+//    var body: some View {
+//        NavigationView {
+//            ScrollView {
+//                Text(vm.errorMessage)
+//
+//                ForEach(vm.users) { user in
+//                    Button {
+//                        presentationMode.wrappedValue.dismiss()
+//                        reciever(user)
+//                    } label: {
+//                        HStack(spacing: 16) {
+//                            KFImage(URL(string: user.profilePictureUrl))
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: 50, height: 50)
+//                                .clipped()
+//                                .cornerRadius(50)
+//                                .overlay(RoundedRectangle(cornerRadius: 50)
+//                                            .stroke(Color(.label), lineWidth: 2)
+//                                )
+//                            Text(user.userName.capitalizingFirstLetter())
+//                                .foregroundColor(Color(.label))
+//                            Spacer()
+//                        }.padding(.horizontal)
+//                    }
+//                    Divider()
+//                        .padding(.vertical, 8)
+//                }
+//            }.navigationTitle("New Message")
+//                .toolbar {
+//                    ToolbarItemGroup(placement: .navigationBarLeading) {
+//                        Button {
+//                            presentationMode.wrappedValue.dismiss()
+//                        } label: {
+//                            Text("Cancel")
+//                        }
+//                    }
+//                }
+//        }
+//    }
+//}
