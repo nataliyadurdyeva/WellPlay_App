@@ -15,7 +15,7 @@ import CoreMedia
 
 class AppViewModel: NSObject, ObservableObject {
     
-    
+    static let shared = AppViewModel()
     
     @Published var errorMessage = ""
     @Published var messageToSetVisible: String?
@@ -28,9 +28,9 @@ class AppViewModel: NSObject, ObservableObject {
     @Published var reciever: User?
     @Published var message: Message?
     @State private var fromId = ""
-
+    
     @Published var messages = [Message]()
-
+    
     @State var isShowingNewMessageView = false
     @State var showChatView = false
     @State var text = ""
@@ -41,13 +41,13 @@ class AppViewModel: NSObject, ObservableObject {
         tempCurrentUser = nil
         userSession = Auth.auth().currentUser
         fetchUser()
-      
-     fetchRecentMessage()
+        //        fetchMessages(message: message, reciever: reciever)
+        //     fetchRecentMessage()
     }
     
     func sendMessage(text: String, reciever: User?) {
         
-      
+        
         guard let fromID = self.currentUser?.id else { return }
         guard let toID = reciever?.id else { return }
         
@@ -75,7 +75,7 @@ class AppViewModel: NSObject, ObservableObject {
             .document(toID)
             .collection("recent-messages")
             .document(fromID)
-           
+        
         let messageID = currentUserRef.documentID
         
         let data: [String: Any] = ["text": text,
@@ -97,7 +97,7 @@ class AppViewModel: NSObject, ObservableObject {
         
         recentUserRef.setData(data)
         recentRecievingRef.setData(data)
-   
+        
     }
     
     func fetchMessages(message: Message?, reciever: User?)  {
@@ -112,7 +112,7 @@ class AppViewModel: NSObject, ObservableObject {
         
         query.addSnapshotListener { querySnapshot, error in
             guard let changes = querySnapshot?.documents else { return }
-
+            
             
             self.messages = changes.map { (QueryDocumentSnapshot) -> Message in
                 
@@ -124,34 +124,31 @@ class AppViewModel: NSObject, ObservableObject {
                 self.count += 1
             }
         }
-
+        
     }
     
     func fetchRecentMessage() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-
-
+        
+        
         let query = Firestore.firestore().collection("messages")
             .document(currentUid)
             .collection("recent-messages")
-
-            .order(by: "timestamp", descending: false)
-
+        
+            .order(by: "timestamp", descending: true)
+        
         query.addSnapshotListener { querySnapshot, error in
             guard let changes = querySnapshot?.documents else { return }
-
+            
             self.messages = changes.map { (QueryDocumentSnapshot) -> Message in
-
+                
                 let data = QueryDocumentSnapshot.data()
                 return Message(data: data)
-
+                
             }
         }
         
-        DispatchQueue.main.async {
-            self.count += 1
-        }
-
+        
     }
     
     
@@ -216,7 +213,7 @@ class AppViewModel: NSObject, ObservableObject {
                 print("No documents")
                 return
             }
-
+            
             self.users = documents.map { (queryDocumentSnapshot) -> User in
                 
                 let data = queryDocumentSnapshot.data()
@@ -272,58 +269,58 @@ class AppViewModel: NSObject, ObservableObject {
             Firestore.firestore().collection("users")
                 .document(uid)
                 .getDocument { snapshot, _ in
-                guard let user = try? snapshot?.data(as: User.self) else {
-                    print("Failed to Fetch user....")
-                    
-                    return
-                    
+                    guard let user = try? snapshot?.data(as: User.self) else {
+                        print("Failed to Fetch user....")
+                        
+                        return
+                        
+                    }
+                    completion(user)
                 }
-                completion(user)
-            }
         }
     }
     
-//    func fetchUserRecentMessage(reciever: User?) {
-//
-//        guard let fromID = self.currentUser?.id else { return }
-////        guard let toID = reciever?.id else { return }
-//
-//        let query = Firestore.firestore().collection("messages")
-//            .document(fromID)
-//            .collection("recent-messages")
-//
-//            query.addSnapshotListener { querySnapshot, error in
-//            guard let documents = querySnapshot?.documents else {
-//            print("No documents")
-//            return
-//        }
-//
-//                self.users = documents.map { (QueryDocumentSnapshot) -> User in
-//
-//                    let data = QueryDocumentSnapshot.data()
-//                    let id = data["uid"] as? String ?? ""
-//                    let userName = data["userName"] as? String ?? ""
-//                    let age = data["age"] as? String ?? ""
-//                    let location = data["location"] as? String ?? ""
-//                    let sports = data["sports"] as? String ?? ""
-//                    let profilePictureUrl = data["profilePictureUrl"] as? String ?? ""
-//                    let bio = data["bio"] as? String ?? ""
-//
-//
-//                    return User(id: id, userName: userName, age: age, location: location, sports: sports, bio: bio, profilePictureUrl: profilePictureUrl)
-//
-//        }
-//    }
-//    }
+    //    func fetchUserRecentMessage(reciever: User?) {
+    //
+    //        guard let fromID = self.currentUser?.id else { return }
+    ////        guard let toID = reciever?.id else { return }
+    //
+    //        let query = Firestore.firestore().collection("messages")
+    //            .document(fromID)
+    //            .collection("recent-messages")
+    //
+    //            query.addSnapshotListener { querySnapshot, error in
+    //            guard let documents = querySnapshot?.documents else {
+    //            print("No documents")
+    //            return
+    //        }
+    //
+    //                self.users = documents.map { (QueryDocumentSnapshot) -> User in
+    //
+    //                    let data = QueryDocumentSnapshot.data()
+    //                    let id = data["uid"] as? String ?? ""
+    //                    let userName = data["userName"] as? String ?? ""
+    //                    let age = data["age"] as? String ?? ""
+    //                    let location = data["location"] as? String ?? ""
+    //                    let sports = data["sports"] as? String ?? ""
+    //                    let profilePictureUrl = data["profilePictureUrl"] as? String ?? ""
+    //                    let bio = data["bio"] as? String ?? ""
+    //
+    //
+    //                    return User(id: id, userName: userName, age: age, location: location, sports: sports, bio: bio, profilePictureUrl: profilePictureUrl)
+    //
+    //        }
+    //    }
+    //    }
     
     func fetchUserRecentMessage(receiver: User) {
-      
+        
         
         guard let uid = message?.fromId else { return }
         let query = Firestore.firestore().collection("users")
-                    .document(uid)
+            .document(uid)
         query.getDocument { snapshot, _ in
             self.message?.user = try? snapshot?.data(as: User.self)
         }
     }
-    }
+}

@@ -19,46 +19,44 @@ struct AllConversationsView: View {
     @State private var senderUserName = ""
     @State var shouldShowLogOutOptions = false
     @State var reciever: User?
-    init() {
-        
-    }
+    
     
     var body: some View {
         NavigationView {
             ZStack {
                 Color("DarkBlue")
-
+                
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack (alignment: .leading) {
-
+                    
                     customNavBar
-
+                    
                     messagesView
                     
                     NavigationLink("", isActive: $ChatViewIsActive) {
                         ChatLogView(reciever: reciever)
                     }
                 }
-//                .overlay(
-//                    newMessageButton, alignment: .bottom)
+                //                .overlay(
+                //                    newMessageButton, alignment: .bottom)
                 .navigationBarTitleDisplayMode(.inline)
-               
+                
                 
             }
         }
-//        .offset(y: -200)
+        //        .offset(y: -200)
     }
     private var messagesView: some View {
         
         VStack (alignment: .leading) {
             
-           
+            
             HStack {
                 
-            Text("Recent Chats")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(Color(.lightGray))
+                Text("Recent Chats")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(Color(.lightGray))
                 
             } .offset(x: 10)
             
@@ -67,73 +65,81 @@ struct AllConversationsView: View {
                 VStack {
                     Button {
                         let selectedUser: User? = {
-                            return viewModel.users.first(where: {
-                                $0.id == message.toId
-                            })
+                            if viewModel.currentUser?.id == message.fromId {
+                                return viewModel.users.first(where: {
+                                    $0.id == message.toId
+                                })
+                            } else {
+                                return viewModel.users.first(where: {
+                                    $0.id == message.fromId
+                                })
+                            }
                         }()
                         self.reciever = selectedUser
-//                        self.viewModel.fetchMessages(message: message, reciever: selectedUser)
+                        //                        self.viewModel.fetchMessages(message: message, reciever: selectedUser)
                         self.ChatViewIsActive.toggle()
                     } label:{
-//
-//                Divider()
-//                    .padding(.vertical, 8)
-//
-//
-                HStack(alignment: .top, spacing: 10) {
-                    
-                    
-                    if viewModel.currentUser?.id == message.fromId {
-                        KFImage(URL(string: message.recieverProfilePictureUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                            .cornerRadius(20)
-                    
-                    } else {
-                        KFImage(URL(string: message.senderProfilePictureUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                            .cornerRadius(20)
-                    }
-                    VStack(alignment: .leading, spacing: 4)  {
-                        if viewModel.currentUser?.id == message.fromId {
-                            Text(message.recieverUserName.capitalizingFirstLetter())
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(Color(.lightGray))
-                        } else {
-                            Text(message.senderUserName.capitalizingFirstLetter())
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(Color(.lightGray))
-                        }
+                        //
+                        //                Divider()
+                        //                    .padding(.vertical, 8)
+                        //
+                        //
+                        HStack(alignment: .top, spacing: 10) {
+                            
+                            
+                            if viewModel.currentUser?.id == message.fromId {
+                                KFImage(URL(string: message.recieverProfilePictureUrl))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
+                                    .cornerRadius(20)
+                                
+                            } else {
+                                KFImage(URL(string: message.senderProfilePictureUrl))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
+                                    .cornerRadius(20)
+                            }
+                            VStack(alignment: .leading, spacing: 4)  {
+                                if viewModel.currentUser?.id == message.fromId {
+                                    Text(message.recieverUserName.capitalizingFirstLetter())
+                                        .font(.system(size: 18, weight: .bold))
+                                        .foregroundColor(Color(.lightGray))
+                                } else {
+                                    Text(message.senderUserName.capitalizingFirstLetter())
+                                        .font(.system(size: 18, weight: .bold))
+                                        .foregroundColor(Color(.lightGray))
+                                }
+                                
+                                //                        NavigationLink(destination: ChatLogView(reciever: selectedUser)){
+                                Text(message.text)
+                                
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color(.lightGray))
+                                
+                            }
+                        } .offset(x: 10)
                         
-//                        NavigationLink(destination: ChatLogView(reciever: selectedUser)){
-                            Text(message.text)
-                         
-                                .font(.system(size: 16))
-                                .foregroundColor(Color(.lightGray))
-                        
                     }
-                } .offset(x: 10)
-          
-            }
-            }
+                }
             }
             
+        }.onAppear(){
+            viewModel.fetchRecentMessage()
         }
-
-        }
-
-
+        
+    }
+    
+    
     private var customNavBar: some View {
-
-            
+        
+        
         VStack (alignment: .leading) {
-
-          
+            
+            
             HStack  (alignment: .top, spacing: 10){
                 
                 KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
@@ -180,12 +186,12 @@ struct AllConversationsView: View {
                     .cancel()
                 ])
             }
-        
+            
         }
-    
+        
     }
     
-
+    
     
 }
 
