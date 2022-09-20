@@ -135,7 +135,7 @@ class AppViewModel: NSObject, ObservableObject {
             .document(currentUid)
             .collection("recent-messages")
 
-//            .order(by: "timestamp", descending: false)
+            .order(by: "timestamp", descending: false)
 
         query.addSnapshotListener { querySnapshot, error in
             guard let changes = querySnapshot?.documents else { return }
@@ -146,6 +146,10 @@ class AppViewModel: NSObject, ObservableObject {
                 return Message(data: data)
 
             }
+        }
+        
+        DispatchQueue.main.async {
+            self.count += 1
         }
 
     }
