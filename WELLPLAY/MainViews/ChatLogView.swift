@@ -15,7 +15,7 @@ struct ChatLogView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var ChatViewIsActive: Bool = true
     
-    let reciever: User?
+    var reciever: User?
     @State var messages: Message?
     
     @State private var text: String = ""
@@ -42,128 +42,128 @@ struct ChatLogView: View {
     var body: some View {
         
         VStack {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            VStack (alignment: .leading){
-                HStack {
-                    Image(systemName: "arrowshape.turn.up.backward.fill").padding()
-                        .foregroundColor(notSelected)
-                    Spacer()
-                    HStack (alignment: .top) {
-
-                        Spacer()
-                        KFImage(URL(string: reciever?.profilePictureUrl ?? self.profilePictureUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                            .cornerRadius(20)
-                        Text(reciever?.userName.capitalizingFirstLetter() ?? self.userName)
-                            .font(.system(size:25)).fontWeight(Font.Weight.medium)
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                VStack (alignment: .leading){
+                    HStack {
+                        Image(systemName: "arrowshape.turn.up.backward.fill").padding()
                             .foregroundColor(notSelected)
                         Spacer()
-                    }
-                    .offset(x: -35)
+                        HStack (alignment: .top) {
+                            
+                            Spacer()
+                            KFImage(URL(string: reciever?.profilePictureUrl ?? self.profilePictureUrl))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 35, height: 35)
+                                .clipShape(Circle())
+                                .cornerRadius(20)
+                            Text(reciever?.userName.capitalizingFirstLetter() ?? self.userName)
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(notSelected)
+                            Spacer()
+                        }
+                        .offset(x: -35)
                         .padding()
                         
-                }
-            }
-        }.background(Color("DarkBlue"))
-        
-        
-        VStack {
-            ScrollView{
-                ScrollViewReader { proxy in
-                    VStack (alignment: .leading, spacing: 12) {
-                        ForEach(viewModel.messages, id: \.self)
-                        { message in
-                            HStack {
-                                if  message.fromId == viewModel.userSession?.uid {
-                                    Spacer()
-                                    Text(message.text)
-                                        .padding(12)
-                                        .background(Color.blue.opacity(0.6))
-                                        .font(.system(size: 16))
-                                        .clipShape(ChatBubble(isFromCurrentUser: true))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal)
-                                        .padding(.leading, 100)
-                                                                             
-                                } else {
-                    
-                                        Text(message.text)
-                                    .padding(12)
-                                        .background(Color(.systemGray6))
-                                        .font(.system(size: 16))
-                                        .clipShape(ChatBubble(isFromCurrentUser: false))
-                                        .foregroundColor(.black)
-                                        .padding(.horizontal)
-
-                                }
-                            }
-                        }
-                        
-                        HStack { Spacer() }
-                        
-                            .id(Self.emptyScrollToString)
-                         
-                    }
-                    .onAppear() {
-                        self.viewModel.fetchMessages(message: messages, reciever: reciever)
-                    }
-                    .onReceive(viewModel.$count) { _ in
-                        withAnimation (.easeOut(duration: 0.5)) {
-                            proxy.scrollTo(Self.emptyScrollToString, anchor: .bottom)
-                        }
                     }
                 }
-            }
-//            .background(Color(.init(white: 0.95, alpha: 1)))
-//            .background(Color("DarkBlue").opacity(0.7))
-            //                .safeAreaInset(edge: .bottom)
+            }.background(Color("DarkBlue"))
+            
             
             VStack {
-
-                Rectangle()
-
-                    .frame(width: UIScreen.main.bounds.width, height: 0.3)
-                    .edgesIgnoringSafeArea(.horizontal)
-
-                HStack{
-                    
-                    CustomTextField(placeholder: Text("Enter your message here"), text: $text)
-                    
-                        .textFieldStyle(PlainTextFieldStyle())
-
-//                        .font(.body)
-                        .frame(height: 10)
-                        .disableAutocorrection(true)
-                    
-                    Button(action: {
-                        viewModel.sendMessage(text: text, reciever: reciever)
-                        text.removeAll()
-                    }) {
-                        
-                        ZStack {
-                            Image(systemName: "paperplane.fill")
-                                .font(.system(size: 17, weight: .semibold))
-                                .foregroundColor(.blue.opacity(0.8))
-                                .padding(15)
-                                .cornerRadius(50)
-                                .frame(height: 30)
+                ScrollView{
+                    ScrollViewReader { proxy in
+                        VStack (alignment: .leading, spacing: 12) {
+                            ForEach(viewModel.messages, id: \.self)
+                            { message in
+                                HStack {
+                                    if  message.fromId == viewModel.userSession?.uid {
+                                        Spacer()
+                                        Text(message.text)
+                                            .padding(12)
+                                            .background(Color.blue.opacity(0.6))
+                                            .font(.system(size: 16))
+                                            .clipShape(ChatBubble(isFromCurrentUser: true))
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal)
+                                            .padding(.leading, 100)
+                                        
+                                    } else {
+                                        
+                                        Text(message.text)
+                                            .padding(12)
+                                            .background(Color(.systemGray6))
+                                            .font(.system(size: 16))
+                                            .clipShape(ChatBubble(isFromCurrentUser: false))
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal)
+                                        
+                                    }
+                                }
+                            }
+                            
+                            HStack { Spacer() }
+                            
+                                .id(Self.emptyScrollToString)
+                            
+                        }
+                        .onAppear() {
+                            self.viewModel.fetchMessages(message: messages, reciever: reciever)
+                        }
+                        .onReceive(viewModel.$count) { _ in
+                            withAnimation (.easeOut(duration: 0.5)) {
+                                proxy.scrollTo(Self.emptyScrollToString, anchor: .bottom)
+                            }
                         }
                     }
                 }
-                .padding(.bottom, 8)
-                .padding(.horizontal)
-            }
+                //            .background(Color(.init(white: 0.95, alpha: 1)))
+                //            .background(Color("DarkBlue").opacity(0.7))
+                //                .safeAreaInset(edge: .bottom)
+                
+                VStack {
+                    
+                    Rectangle()
+                    
+                        .frame(width: UIScreen.main.bounds.width, height: 0.3)
+                        .edgesIgnoringSafeArea(.horizontal)
+                    
+                    HStack{
+                        
+                        CustomTextField(placeholder: Text("Enter your message here"), text: $text)
+                        
+                            .textFieldStyle(PlainTextFieldStyle())
+                        
+                        //                        .font(.body)
+                            .frame(height: 10)
+                            .disableAutocorrection(true)
+                        
+                        Button(action: {
+                            viewModel.sendMessage(text: text, reciever: reciever)
+                            text.removeAll()
+                        }) {
+                            
+                            ZStack {
+                                Image(systemName: "paperplane.fill")
+                                    .font(.system(size: 17, weight: .semibold))
+                                    .foregroundColor(.blue.opacity(0.8))
+                                    .padding(15)
+                                    .cornerRadius(50)
+                                    .frame(height: 30)
+                            }
+                        }
+                    }
+                    .padding(.bottom, 8)
+                    .padding(.horizontal)
+                }
+                
+                
+            }.navigationBarBackButtonHidden(true)
             
-            
-        }.navigationBarBackButtonHidden(true)
-    
         }.offset(y: -25)
-        .background(Color("DarkBlue").opacity(0.6))
+            .background(Color("DarkBlue").opacity(0.6))
     }
     
 }
@@ -202,10 +202,10 @@ struct MessageViewModel {
 
 struct ChatBubble: Shape {
     var isFromCurrentUser: Bool
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight, isFromCurrentUser ? .bottomLeft: .bottomRight], cornerRadii: CGSize(width: 16, height: 16))
-
+        
         return Path(path.cgPath)
     }
 }
