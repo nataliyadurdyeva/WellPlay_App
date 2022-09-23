@@ -63,8 +63,15 @@ struct HomeView: View {
                 }.tag(2)
         }.accentColor(rgbColor).imageScale(.large)
             .onAppear{
-                UITabBar.appearance().barTintColor = .init(named: "DarkBlue")
+                
+                    let tabBarAppearance = UITabBarAppearance()
+                    tabBarAppearance.backgroundColor = .init(named: "DarkBlue")
+                    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                
             }
+//            .onAppear{
+//                UITabBar.appearance().barTintColor = .init(named: "DarkBlue")
+//            }
     }
     
 }

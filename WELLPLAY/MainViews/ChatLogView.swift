@@ -127,7 +127,7 @@ struct ChatLogView: View {
                     
                     Rectangle()
                     
-                        .frame(width: UIScreen.main.bounds.width, height: 0.3)
+                        .frame(width: UIScreen.main.bounds.width, height: 0.8)
                         .edgesIgnoringSafeArea(.horizontal)
                     
                     HStack{
@@ -137,7 +137,7 @@ struct ChatLogView: View {
                             .textFieldStyle(PlainTextFieldStyle())
                         
                         //                        .font(.body)
-                            .frame(height: 10)
+                            .frame(height: 30)
                             .disableAutocorrection(true)
                         
                         Button(action: {
@@ -162,7 +162,8 @@ struct ChatLogView: View {
                 
             }.navigationBarBackButtonHidden(true)
             
-        }.offset(y: -25)
+        }
+//        .offset(y: -25)
             .background(Color("DarkBlue").opacity(0.6))
     }
     
@@ -189,15 +190,15 @@ struct CustomTextField: View {
 }
 
 
-struct MessageViewModel {
-    
-    @ObservedObject var viewModel: AppViewModel
-    let message: Message
-    
-    var currentUid: String { return viewModel.userSession?.uid ?? "" }
-    
-    var isFromCurrentUser: Bool { return message.fromId == currentUid }
-}
+//struct MessageViewModel {
+//    
+//    @ObservedObject var viewModel: AppViewModel
+//    let message: Message
+//    
+//    var currentUid: String { return viewModel.userSession.uid ?? "" }
+//    
+//    var isFromCurrentUser: Bool { return message.fromId == currentUid }
+//}
 
 
 struct ChatBubble: Shape {

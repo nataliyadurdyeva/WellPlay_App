@@ -14,8 +14,11 @@ struct SearchView: View {
     
     init() {
         
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.green]
+        
+        
     }
+    
     
     @State private var userName = ""
     @State private var age = ""
@@ -37,9 +40,12 @@ struct SearchView: View {
         
         NavigationView {
             
+            
             //            if viewModel.currentUser?.location == user?.location ?? "" {
             
             VStack {
+                
+                
                 
                 Text("FIND SPORT BUDDIES NEAR YOU!")
                     .font(.headline)
@@ -60,7 +66,7 @@ struct SearchView: View {
                     .padding()
                 
                 VStack {
-                    
+                   
                     List {
                         
                         ForEach(filteredUsers, id: \.self)
@@ -69,10 +75,11 @@ struct SearchView: View {
                             SearchCell(user: user)
                             
                         }
-                        .listRowBackground(Color(.white).opacity(0.1))
-                    }.listStyle(.plain)
-                    
-                    
+                        .listRowBackground(Color("DarkBlue"))
+                    }
+                    .listStyle(.plain)
+                        
+              
                 }
             }.onAppear() {
                 self.viewModel.fetchUsers()
@@ -127,6 +134,7 @@ struct SearchCell: View {
                         
                     }
                 }.padding(25)
+                    .background(Color("DarkBlue"))
                 
                 VStack (alignment: .leading) {
                     HStack {
@@ -166,6 +174,7 @@ struct SearchCell: View {
                 }
                 
             }
+//            .background(Color("DarkBlue"))
         }
         //        } else {
         //            ProfileView()

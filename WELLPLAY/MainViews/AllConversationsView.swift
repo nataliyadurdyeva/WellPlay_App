@@ -34,6 +34,8 @@ struct AllConversationsView: View {
                     
                     messagesView
                     
+                    Spacer()
+                    
                     NavigationLink("", isActive: $ChatViewIsActive) {
                         ChatLogView(reciever: reciever)
                     }
@@ -45,7 +47,7 @@ struct AllConversationsView: View {
                 
             }
         }
-        //        .offset(y: -200)
+//                .offset(y: -200)
     }
     private var messagesView: some View {
         
@@ -62,6 +64,7 @@ struct AllConversationsView: View {
             
             ForEach(viewModel.messages, id: \.self)
             { message in
+                Divider()
                 VStack {
                     Button {
                         let selectedUser: User? = {
@@ -125,7 +128,7 @@ struct AllConversationsView: View {
                         
                     }
                 }
-            }
+            }.padding(2)
             
         }.onAppear(){
             viewModel.fetchRecentMessage()
@@ -140,7 +143,7 @@ struct AllConversationsView: View {
         VStack (alignment: .leading) {
             
             
-            HStack  (alignment: .top, spacing: 10){
+            HStack  (alignment: .top, spacing: 20){
                 
                 KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                     .resizable()
