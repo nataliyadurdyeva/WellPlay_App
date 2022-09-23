@@ -229,6 +229,36 @@ class AppViewModel: NSObject, ObservableObject {
         }
     }
     
+    func deleteUser() {
+        let userId = Auth.auth().currentUser!.uid
+        
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(userId)
+            .delete() { error in
+          if let error = error {
+            print("Error deleting user: \(error)")
+          } else {
+              print("User deleted")
+          }
+        }
+        
+//
+//        db.collection("messages")
+//            .document(userId)
+//            .delete() { error in
+//          if let error = error {
+//            print("Error deleting messages: \(error)")
+//          } else {
+//              print("Messages deleted")
+//          }
+//        }
+        
+        let user = Auth.auth().currentUser
+        user?.delete()
+        
+        
+    }
     
     func uploadProfilePhoto(_ profilePicture: UIImage) {
         
