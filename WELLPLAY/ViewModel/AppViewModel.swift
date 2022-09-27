@@ -232,15 +232,18 @@ class AppViewModel: NSObject, ObservableObject {
     
     func updateUser(userName: String, age: String){
         
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
+        let docUpdate = db.collection("users").document(userId)
+            
+        
         let data: [String: Any] = [
             "userName": userName,
             "age": age
         ]
-        guard let userId = Auth.auth().currentUser?.uid else {return}
         
-        let docUpdate = db.collection("recipe")
-            .document(userId)
         docUpdate.updateData(data)
+        
     }
     
     func deleteUser() {

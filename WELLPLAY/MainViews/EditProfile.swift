@@ -1,8 +1,8 @@
 //
-//  ProfileView.swift
-//  WellPlay
+//  EditProfile.swift
+//  WELLPLAY
 //
-//  Created by Nataliya Durdyeva on 8/14/22.
+//  Created by Nataliya Durdyeva on 9/26/22.
 //
 
 import Foundation
@@ -10,30 +10,23 @@ import UIKit
 import SwiftUI
 import Kingfisher
 
-struct ProfileView: View {
+struct EditProfileView: View {
     
-    @ObservedObject var viewModel: AppViewModel
+    @EnvironmentObject var viewModel: AppViewModel
     
     init() {
 
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 50)!]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-       
-          
-            self.viewModel = AppViewModel()
-            viewModel.fetchUsers()
-          
-            
-      
-        
     }
-    @State private var isShowingEditProfile: Bool = false
+
     @State private var userName = ""
     @State private var age = ""
     @State private var location = ""
     @State private var sports = ""
     @State private var bio = ""
     @State private var profilePictureUrl = ""
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
@@ -49,15 +42,6 @@ struct ProfileView: View {
                             .font(.system(size:25))
                             .bold()
                         Spacer()
-                        Button(action: { isShowingEditProfile.toggle() }, label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                               
-                        })
-                        .sheet(isPresented: $isShowingEditProfile, content: { EditProfileView()
-                            
-                        })
-                        .padding(30)
                         
                         KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                             .resizable()
@@ -66,30 +50,26 @@ struct ProfileView: View {
                             .clipShape(Circle())
                             .cornerRadius(20)
                         
-                        Text("\(viewModel.currentUser?.userName.capitalizingFirstLetter() ?? self.userName), \(viewModel.currentUser?.age ?? self.age)")
-                            .font(.system(size:25)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
+                        TextField("\(viewModel.currentUser?.userName.capitalizingFirstLetter() ?? self.userName), \(viewModel.currentUser?.age ?? self.age)", text: $userName)
+                            
                         
-                        Text(viewModel.currentUser?.location ?? self.location)
-                            .font(.system(size:15)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
+                        TextField(viewModel.currentUser?.location ?? self.location, text: $location)
+                           
                         
                         Spacer()
                         
                         Text("Your current sports:")
                             .font(.system(size:20)).fontWeight(Font.Weight.medium)
                             .foregroundColor(.white)
-                        Text(viewModel.currentUser?.sports ?? self.sports)
-                            .foregroundColor(.white)
-                            .font(.system(size:18)).fontWeight(Font.Weight.light)
+                        TextField(viewModel.currentUser?.sports ?? self.sports, text: $sports)
+                            
                     }
                     
                     
                     VStack {
                         
-                        Text(viewModel.currentUser?.bio ?? self.bio)
-                            .font(.system(size:18)).fontWeight(Font.Weight.light)
-                            .foregroundColor(.white)
+                        TextField(viewModel.currentUser?.bio ?? self.bio, text: $bio)
+                            
                             .frame(width: 280, height: 100)
                         //                        .background(Color("DarkBlue"))
                             .cornerRadius(20)
@@ -106,7 +86,8 @@ struct ProfileView: View {
                         
                         Button(action: {
                             
-                            viewModel.signout()
+                            viewModel.updateUser(userName: userName, age: age)
+                            dismiss()
                         }) {
                             
                             ZStack {
@@ -114,28 +95,13 @@ struct ProfileView: View {
                                     .frame(width: 280, height: 45)
                                     .foregroundColor(Color(.lightGray))
                                 
-                                Text("Sign Out")
+                                Text("Update")
                                     .font((.system(size: 15, weight: .semibold, design: .default))
                                     )
                             }
                         }
                         .padding(30)
-                        Button(action: {
-                            
-                            viewModel.deleteUser()
-                            viewModel.signout()
-                        }) {
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 280, height: 45)
-                                    .foregroundColor(Color(.lightGray))
-                                
-                                Text("Delete Account")
-                                    .font((.system(size: 15, weight: .semibold, design: .default))
-                                    )
-                            }
-                        }
+                     
                         
                     }
                 }.onAppear() {
@@ -149,12 +115,4 @@ struct ProfileView: View {
 }
 
 
-extension String {
-    func capitalizingFirstLetter() -> String {
-        return prefix(1).uppercased() + self.lowercased().dropFirst()
-    }
-    
-    mutating func capitalizeFirstLetter() {
-        self = self.capitalizingFirstLetter()
-    }
-}
+
