@@ -28,6 +28,7 @@ class AppViewModel: NSObject, ObservableObject {
     @Published var reciever: User?
     @Published var message: Message?
     @State private var fromId = ""
+    let db = Firestore.firestore()
     
     @Published var messages = [Message]()
     
@@ -227,6 +228,19 @@ class AppViewModel: NSObject, ObservableObject {
                 return User(id: id, userName: userName, age: age, location: location, sports: sports, bio: bio, profilePictureUrl: profilePictureUrl)
             }
         }
+    }
+    
+    func updateUser(userName: String, age: String){
+        
+        let data: [String: Any] = [
+            "userName": userName,
+            "age": age
+        ]
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
+        let docUpdate = db.collection("recipe")
+            .document(userId)
+        docUpdate.updateData(data)
     }
     
     func deleteUser() {
