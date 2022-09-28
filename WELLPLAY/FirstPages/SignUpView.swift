@@ -136,6 +136,7 @@ struct SignUpView: View {
     }
 }
 
+
 extension SignUpView {
     func loadPhoto() {
         

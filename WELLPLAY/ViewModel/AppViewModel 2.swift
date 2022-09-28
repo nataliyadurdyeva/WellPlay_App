@@ -28,9 +28,6 @@ class AppViewModel: NSObject, ObservableObject {
     @Published var reciever: User?
     @Published var message: Message?
     @State private var fromId = ""
-    @State private var email = ""
-    @State private var password = ""
-  
     let db = Firestore.firestore()
     
     @Published var messages = [Message]()
@@ -160,23 +157,14 @@ class AppViewModel: NSObject, ObservableObject {
         
         let auth = Auth.auth()
         
-                if email != "" && password != ""{
-        
         auth.signIn(withEmail: email, password: password) {[weak self] result, error in
-            if let error = error {
-                self?.errorMessage = "\(error.localizedDescription)"
-                print(error)
+            guard result != nil, error == nil else {
                 return
             }
             guard let user = result?.user else { return }
             self?.userSession = user
             self?.fetchUser()
         }
-                } else {
- print ("Sign in is possible only when email and password are entered correctly")
-                        return
-                    }
-            
     }
     
     func signUp(email: String, password: String, userName: String, age: String, location: String, sports: String, bio: String) {
@@ -186,8 +174,7 @@ class AppViewModel: NSObject, ObservableObject {
         auth.createUser(withEmail: email, password: password) {
             result, error in
             if let error = error {
-                self.errorMessage = "\(error.localizedDescription)"
-                print(error)
+                print("Failed to create user:", error)
                 return
             }
             
@@ -219,31 +206,6 @@ class AppViewModel: NSObject, ObservableObject {
         try? Auth.auth().signOut()
     }
     
-    
-//    func verify(){
-//
-//        if email != "" && password != ""{
-//
-//            Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
-//
-//                if err != nil{
-//
-//                    self.errorMessage = errorMessage.localizedDescription
-//                    self.alert.toggle()
-//                    return
-//                }
-//
-//                print("success")
-//                UserDefaults.standard.set(true, forKey: "status")
-//                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-//            }
-//        }
-//        else{
-//
-//            self.error = "Please fill all the contents properly"
-//            self.alert.toggle()
-//        }
-//    }
     
     func fetchUsers() {
         let db = Firestore.firestore()
@@ -278,80 +240,6 @@ class AppViewModel: NSObject, ObservableObject {
         let data: [String: Any] = [
             "userName": userName,
             "age": age
-        ]
-        
-        docUpdate.updateData(data)
-        
-    }
-    func updateName(userName: String){
-        
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        let docUpdate = db.collection("users").document(userId)
-            
-        
-        let data: [String: Any] = [
-            "userName": userName
-        ]
-        
-        docUpdate.updateData(data)
-        
-    }
-    
-    func updateAge(age:String){
-        
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        let docUpdate = db.collection("users").document(userId)
-            
-        
-        let data: [String: Any] = [
-            "age": age
-        ]
-        
-        docUpdate.updateData(data)
-        
-    }
-    
-    func updateLocation(location: String){
-        
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        let docUpdate = db.collection("users").document(userId)
-            
-        
-        let data: [String: Any] = [
-            "location": location
-        ]
-        
-        docUpdate.updateData(data)
-        
-    }
-    
-    func updateSports(sports: String){
-        
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        let docUpdate = db.collection("users").document(userId)
-            
-        
-        let data: [String: Any] = [
-            "sports": sports
-        ]
-        
-        docUpdate.updateData(data)
-        
-    }
-    
-    func updateBio(bio: String){
-        
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-        let docUpdate = db.collection("users").document(userId)
-            
-        
-        let data: [String: Any] = [
-            "bio": bio
         ]
         
         docUpdate.updateData(data)
