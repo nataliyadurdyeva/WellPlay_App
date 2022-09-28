@@ -215,6 +215,7 @@ class AppViewModel: NSObject, ObservableObject {
     
     
     func signout() {
+        
         self.userSession = nil
         try? Auth.auth().signOut()
     }
@@ -385,6 +386,7 @@ class AppViewModel: NSObject, ObservableObject {
         
         let user = Auth.auth().currentUser
         user?.delete()
+        self.signout()
         
         
     }
