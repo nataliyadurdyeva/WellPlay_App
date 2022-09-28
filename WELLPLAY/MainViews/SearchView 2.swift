@@ -15,7 +15,8 @@ struct SearchView: View {
     init() {
         
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.green]
-  
+        
+        
     }
     
     
@@ -24,7 +25,6 @@ struct SearchView: View {
     @State private var location = ""
     @State private var sports = ""
     @State var searchText = ""
-    @State var shouldShowLogOutOptions = false
     let searchRectangleColor = Color(red: 0.68, green: 0.81, blue: 0.92)
 //    var user: User?
     
@@ -39,24 +39,18 @@ struct SearchView: View {
     var body: some View {
         
         NavigationView {
-
+            
+            
+            //            if viewModel.currentUser?.location == user?.location ?? "" {
+            
             VStack {
-                HStack (alignment: .bottom) {
+                
+                
+                
                 Text("FIND SPORT BUDDIES NEAR YOU!")
                     .font(.headline)
                     .foregroundColor(.white)
-                    Button(role: .none) {shouldShowLogOutOptions = true
-                    } label: {
-                                Image(systemName: "gear")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(Color(.white))
-                            }
-                    .alert("What do you want to do?", isPresented: $shouldShowLogOutOptions) {
-                        Button("Sign Out", action: {viewModel.signout()})
-                        Button("Delete Account", role: .destructive, action: {viewModel.deleteUser()})
-                        Button("Cancel", role: .cancel, action: {})
-                    }
-            } .background(Color("DarkBlue"))
+                
                 ZStack {
                     Rectangle()
                         .foregroundColor(searchRectangleColor)
@@ -87,14 +81,18 @@ struct SearchView: View {
                         
               
                 }
-            }
-            .onAppear() {
+            }.onAppear() {
                 self.viewModel.fetchUsers()
                 
             }
             .navigationBarTitleDisplayMode(.inline)
             .background(Color("DarkBlue"))
-
+            
+            
+            //            } else {
+            //
+            //                NoFriendsFound()
+            //            }
         }.navigationBarHidden(true)
         
     }
@@ -176,7 +174,16 @@ struct SearchCell: View {
                 }
                 
             }
-
+//            .background(Color("DarkBlue"))
         }
+        //        } else {
+        //            ProfileView()
+        ////            Image("lookingForAFriend")
+        ////                .resizable()
+        ////                .aspectRatio(contentMode: .fill)
+        ////                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        ////                .edgesIgnoringSafeArea(.all)
+        //        }
+        
     }
 }

@@ -10,23 +10,14 @@ import UIKit
 import SwiftUI
 import Kingfisher
 
-struct EditProfileView: View {
+struct EditNameView: View {
     
-    @EnvironmentObject var viewModel: AppViewModel
+    @ObservedObject var viewModel = AppViewModel()
+
+    @State  var userName = ""
     
-    init() {
-
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 50)!]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-    }
-
-    @State private var userName = ""
-    @State private var age = ""
-    @State private var location = ""
-    @State private var sports = ""
-    @State private var bio = ""
-    @State private var profilePictureUrl = ""
     @Environment(\.dismiss) private var dismiss
+    
     
     var body: some View {
         
@@ -34,77 +25,45 @@ struct EditProfileView: View {
             ZStack{
                 Color("DarkBlue")
                     .ignoresSafeArea(.all)
+                
                 VStack {
-                    
-                    VStack{
-                        Text("MY PROFILE")
-                            .foregroundColor(.white)
-                            .font(.system(size:25))
-                            .bold()
-                        Spacer()
-                        
-                        KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 200, height: 200)
-                            .clipShape(Circle())
-                            .cornerRadius(20)
-                        
-                        TextField("\(viewModel.currentUser?.userName.capitalizingFirstLetter() ?? self.userName), \(viewModel.currentUser?.age ?? self.age)", text: $userName)
-                            
-                        
-                        TextField(viewModel.currentUser?.location ?? self.location, text: $location)
+
+                       Group{
+                      Text("Your name:")
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                           TextField(viewModel.currentUser?.userName ?? "", text: $userName
+                                     )
+                           .disableAutocorrection(true)
+                        .font(Font.system(size: 15))
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                    .foregroundColor(.black)
+                                    .padding(2)
                            
-                        
-                        Spacer()
-                        
-                        Text("Your current sports:")
-                            .font(.system(size:20)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
-                        TextField(viewModel.currentUser?.sports ?? self.sports, text: $sports)
-                            
-                    }
-                    
-                    
-                    VStack {
-                        
-                        TextField(viewModel.currentUser?.bio ?? self.bio, text: $bio)
-                            
-                            .frame(width: 280, height: 100)
-                        //                        .background(Color("DarkBlue"))
-                            .cornerRadius(20)
-                            .multilineTextAlignment(.leading)
-                        
-                    }
-                    
-                    .padding()
-                    
-                    Spacer()
-                    
-                    VStack{
-                        
-                        
-                        Button(action: {
-                            
-                            viewModel.updateUser(userName: userName, age: age)
-                            dismiss()
-                        }) {
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 280, height: 45)
-                                    .foregroundColor(Color(.lightGray))
-                                
-                                Text("Update")
-                                    .font((.system(size: 15, weight: .semibold, design: .default))
-                                    )
-                            }
-                        }
-                        .padding(30)
-                     
+                           Button(action: {
+                               
+                               viewModel.updateName(userName: userName)
+                               dismiss()
+                           }) {
+                               
+                               ZStack {
+                                   RoundedRectangle(cornerRadius: 15)
+                                       .frame(width: 280, height: 45)
+                                       .foregroundColor(Color(.lightGray))
+                                   
+                                   Text("Update")
+                                       .font((.system(size: 15, weight: .semibold, design: .default))
+                                       )
+                               }
+                           }
+                           .padding(30)
+
                         
                     }
-                }.onAppear() {
+
+            }
+                .onAppear() {
                     self.viewModel.fetchUsers()
                 }
                 .navigationBarHidden(false)
@@ -116,3 +75,257 @@ struct EditProfileView: View {
 
 
 
+struct EditAgeView: View {
+    
+    @ObservedObject var viewModel = AppViewModel()
+    @State private var age = ""
+    @Environment(\.dismiss) private var dismiss
+    
+    
+    var body: some View {
+        
+        NavigationView {
+            ZStack{
+                Color("DarkBlue")
+                    .ignoresSafeArea(.all)
+                
+                VStack {
+
+                       Group{
+                      Text("Your age:")
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                           TextField(viewModel.currentUser?.age ?? "",
+                                     text: $age)
+                           .keyboardType(.numberPad)
+                        .font(Font.system(size: 12))
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                    .foregroundColor(.black)
+                                    .padding(2)
+                           
+                           Button(action: {
+                               
+                               viewModel.updateAge(age:age)
+                               dismiss()
+                           }) {
+                               
+                               ZStack {
+                                   RoundedRectangle(cornerRadius: 15)
+                                       .frame(width: 280, height: 45)
+                                       .foregroundColor(Color(.lightGray))
+                                   
+                                   Text("Update")
+                                       .font((.system(size: 15, weight: .semibold, design: .default))
+                                       )
+                               }
+                           }
+                           .padding(30)
+
+
+                        
+                    }
+
+            }
+                .onAppear() {
+                    self.viewModel.fetchUsers()
+                }
+                .navigationBarHidden(false)
+                
+            }
+        }
+    }
+}
+
+
+struct EditLocationView: View {
+    
+    @ObservedObject var viewModel = AppViewModel()
+    @State private var location = ""
+    @Environment(\.dismiss) private var dismiss
+    
+    
+    var body: some View {
+        
+        NavigationView {
+            ZStack{
+                Color("DarkBlue")
+                    .ignoresSafeArea(.all)
+                
+                VStack {
+
+                       Group{
+                      Text("Your location:")
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                           TextField(viewModel.currentUser?.location ?? "", text: $location
+                                     )
+                           .disableAutocorrection(true)
+                        .font(Font.system(size: 15))
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                    .foregroundColor(.black)
+                                    .padding(2)
+                           
+                           Button(action: {
+                               
+                               viewModel.updateLocation(location:location)
+                               dismiss()
+                           }) {
+                               
+                               ZStack {
+                                   RoundedRectangle(cornerRadius: 15)
+                                       .frame(width: 280, height: 45)
+                                       .foregroundColor(Color(.lightGray))
+                                   
+                                   Text("Update")
+                                       .font((.system(size: 15, weight: .semibold, design: .default))
+                                       )
+                               }
+                           }
+                           .padding(30)
+
+
+                        
+                    }
+
+            }
+                .onAppear() {
+                    self.viewModel.fetchUsers()
+                }
+                .navigationBarHidden(false)
+                
+            }
+        }
+    }
+}
+
+struct EditSportsView: View {
+    
+    @ObservedObject var viewModel = AppViewModel()
+    @State private var sports = ""
+    @Environment(\.dismiss) private var dismiss
+    
+    
+    var body: some View {
+        
+        NavigationView {
+            ZStack{
+                Color("DarkBlue")
+                    .ignoresSafeArea(.all)
+                
+                VStack {
+
+                       Group{
+                      Text("Your sports:")
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                           TextField(viewModel.currentUser?.sports ?? "", text: $sports
+                                     )
+                           .disableAutocorrection(true)
+                           .autocapitalization(.none)
+                        .font(Font.system(size: 15))
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                    .foregroundColor(.black)
+                                    .padding(2)
+                           
+                           Button(action: {
+                               
+                               viewModel.updateSports(sports:sports)
+                               dismiss()
+                           }) {
+                               
+                               ZStack {
+                                   RoundedRectangle(cornerRadius: 15)
+                                       .frame(width: 280, height: 45)
+                                       .foregroundColor(Color(.lightGray))
+                                   
+                                   Text("Update")
+                                       .font((.system(size: 15, weight: .semibold, design: .default))
+                                       )
+                               }
+                           }
+                           .padding(30)
+
+
+                        
+                    }
+
+            }
+                .onAppear() {
+                    self.viewModel.fetchUsers()
+                }
+                .navigationBarHidden(false)
+                
+            }
+        }
+    }
+}
+
+struct EditBioView: View {
+    
+    @ObservedObject var viewModel = AppViewModel()
+    @State private var bio = ""
+    @Environment(\.dismiss) private var dismiss
+    
+    
+    var body: some View {
+        
+        NavigationView {
+            ZStack{
+                Color("DarkBlue")
+                    .ignoresSafeArea(.all)
+                
+                VStack {
+
+                       Group{
+                      Text("Your bio:")
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                           if #available(iOS 16.0, *) {
+                               TextField(viewModel.currentUser?.bio ?? "", text: $bio, axis: .vertical)
+                                   .multilineTextAlignment(.leading)
+                               
+                               
+                                   .font(Font.system(size: 15))
+                                   .padding()
+                                   .background(RoundedRectangle(cornerRadius: 10).fill(.white))
+                                   .foregroundColor(.black)
+                                   .padding(2)
+                           } else {
+                               // Fallback on earlier versions
+                           }
+                           
+                           Button(action: {
+                               
+                               viewModel.updateBio(bio:bio)
+                               dismiss()
+                           }) {
+                               
+                               ZStack {
+                                   RoundedRectangle(cornerRadius: 15)
+                                       .frame(width: 280, height: 45)
+                                       .foregroundColor(Color(.lightGray))
+                                   
+                                   Text("Update")
+                                       .font((.system(size: 15, weight: .semibold, design: .default))
+                                       )
+                               }
+                           }
+                           .padding(30)
+
+
+                        
+                    }
+
+            }
+                .onAppear() {
+                    self.viewModel.fetchUsers()
+                }
+                .navigationBarHidden(false)
+                
+            }
+        }
+    }
+}

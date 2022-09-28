@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F59C22A28E3B897008D3F35 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F59C22928E3B897008D3F35 /* Errors.swift */; };
 		6FBF6FDC28D307FD0045B3C0 /* WELLPLAYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBF6FDB28D307FD0045B3C0 /* WELLPLAYApp.swift */; };
 		6FBF6FE028D307FE0045B3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF6FDF28D307FE0045B3C0 /* Assets.xcassets */; };
 		6FBF6FEA28D308BB0045B3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF6FE928D308BB0045B3C0 /* GoogleService-Info.plist */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F59C22928E3B897008D3F35 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6FBF6FD828D307FD0045B3C0 /* WELLPLAY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WELLPLAY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FBF6FDB28D307FD0045B3C0 /* WELLPLAYApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WELLPLAYApp.swift; sourceTree = "<group>"; };
 		6FBF6FDF28D307FE0045B3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				6FBF702428D3AC2C0045B3C0 /* User.swift */,
 				6FBF702628D3AC4F0045B3C0 /* Message.swift */,
+				6F59C22928E3B897008D3F35 /* Errors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				6FBF702328D3AC130045B3C0 /* NoFriendsFound.swift in Sources */,
 				6FBF702528D3AC2C0045B3C0 /* User.swift in Sources */,
 				6FBF701828D3ABA00045B3C0 /* HomeView.swift in Sources */,
+				6F59C22A28E3B897008D3F35 /* Errors.swift in Sources */,
 				6FBF701C28D3ABC90045B3C0 /* SignUpView.swift in Sources */,
 				6FBF701028D3AB2E0045B3C0 /* ProfilePhotoSelectorView.swift in Sources */,
 				6FBF702028D3ABF50045B3C0 /* ZeroPage.swift in Sources */,

@@ -15,19 +15,23 @@ struct ProfileView: View {
     @ObservedObject var viewModel: AppViewModel
     
     init() {
-
+        
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Georgia-Bold", size: 50)!]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-       
-          
-            self.viewModel = AppViewModel()
-            viewModel.fetchUsers()
-          
-            
-      
+        
+        
+        self.viewModel = AppViewModel()
+//        viewModel.fetchUsers()
+        
+        
+        
         
     }
-    @State private var isShowingEditProfile: Bool = false
+    @State private var isShowingEditName: Bool = false
+    @State private var isShowingEditAge: Bool = false
+    @State private var isShowingEditLocation: Bool = false
+    @State private var isShowingEditSports: Bool = false
+    @State private var isShowingEditBio: Bool = false
     @State private var userName = ""
     @State private var age = ""
     @State private var location = ""
@@ -48,62 +52,108 @@ struct ProfileView: View {
                             .foregroundColor(.white)
                             .font(.system(size:25))
                             .bold()
-                        Spacer()
-                        Button(action: { isShowingEditProfile.toggle() }, label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                               
-                        })
-                        .sheet(isPresented: $isShowingEditProfile, content: { EditProfileView()
-                            
-                        })
-                        .padding(30)
                         
                         KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 200, height: 200)
+                            .frame(width: 150, height: 150)
                             .clipShape(Circle())
                             .cornerRadius(20)
+                        HStack {
+                            Text(viewModel.currentUser?.userName.capitalizingFirstLetter() ?? self.userName)
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            Button(action: { isShowingEditName.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditName, content: { EditNameView()
+                                
+                            })
+                            
+                        }
+                        HStack {
+                            Text(viewModel.currentUser?.age ?? self.age)
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            Button(action: { isShowingEditAge.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditAge, content: { EditAgeView()
+                                
+                            })
+                            
+                        }
+                        HStack {
+                            Text(viewModel.currentUser?.location ?? self.location)
+                                .font(.system(size:15)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            Button(action: { isShowingEditLocation.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditLocation, content: { EditLocationView()
+                                
+                            })
+                            
+                        }
                         
-                        Text("\(viewModel.currentUser?.userName.capitalizingFirstLetter() ?? self.userName), \(viewModel.currentUser?.age ?? self.age)")
-                            .font(.system(size:25)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
+                        VStack {
+                            
+                            Text("Your current sports:")
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            HStack {
+                                Text(viewModel.currentUser?.sports ?? self.sports)
+                                    .foregroundColor(.white)
+                                    .font(.system(size:18)).fontWeight(Font.Weight.light)
+                                Button(action: { isShowingEditSports.toggle() }, label: {
+                                    Image(systemName: "pencil.circle")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(.gray)
+                                    
+                                })
+                                .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
+                                    
+                                })
+                            }
+                            Spacer(minLength: 8)
+                            Text("Your bio:")
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            HStack {
+                                Text(viewModel.currentUser?.bio ?? self.bio)
+                                    .font(.system(size:18)).fontWeight(Font.Weight.light)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.leading)
+                                Button(action: { isShowingEditBio.toggle() }, label: {
+                                    Image(systemName: "pencil.circle")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(.gray)
+                                    
+                                })
+                                .sheet(isPresented: $isShowingEditBio, content: { EditBioView()
+                                    
+                                })
+                                
+                            }
+                            
+                        }.padding()
                         
-                        Text(viewModel.currentUser?.location ?? self.location)
-                            .font(.system(size:15)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
-                        
-                        Spacer()
-                        
-                        Text("Your current sports:")
-                            .font(.system(size:20)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
-                        Text(viewModel.currentUser?.sports ?? self.sports)
-                            .foregroundColor(.white)
-                            .font(.system(size:18)).fontWeight(Font.Weight.light)
+                    }.onAppear() {
+                        self.viewModel.fetchUsers()
                     }
                     
-                    
-                    VStack {
-                        
-                        Text(viewModel.currentUser?.bio ?? self.bio)
-                            .font(.system(size:18)).fontWeight(Font.Weight.light)
-                            .foregroundColor(.white)
-                            .frame(width: 280, height: 100)
-                        //                        .background(Color("DarkBlue"))
-                            .cornerRadius(20)
-                            .multilineTextAlignment(.leading)
-                        
-                    }
-                    
-                    .padding()
-                    
-                    Spacer()
                     
                     VStack{
-                        
-                        
+
                         Button(action: {
                             
                             viewModel.signout()
@@ -119,10 +169,10 @@ struct ProfileView: View {
                                     )
                             }
                         }
-                        .padding(30)
+                        .padding(10)
                         Button(action: {
                             
-                            viewModel.deleteUser()
+//                            viewModel.deleteUser()
                             viewModel.signout()
                         }) {
                             
@@ -137,17 +187,15 @@ struct ProfileView: View {
                             }
                         }
                         
-                    }
-                }.onAppear() {
-                    self.viewModel.fetchUsers()
+                    }.padding()
                 }
                 .navigationBarHidden(false)
                 
             }
         }
     }
+    
 }
-
 
 extension String {
     func capitalizingFirstLetter() -> String {
