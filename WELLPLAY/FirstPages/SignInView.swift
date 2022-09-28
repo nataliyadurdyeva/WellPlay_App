@@ -28,6 +28,15 @@ struct SignInView: View {
                 .foregroundColor(.white)
                 .padding()
             
+            VStack{
+                Text(viewModel.errorMessage)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color("CarrotColor"))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(nil)
+            }.padding(.top)
+            
             VStack {
                 TextField("Email Address", text: $email)
                     .disableAutocorrection(true)
@@ -64,8 +73,8 @@ struct SignInView: View {
                     
             }.padding()
             Spacer()
-        }
-        .background(Color("search_bg_dirty_tealBlue"))
+        }.navigationBarBackButtonHidden(true)
+        .background(Color("DarkBlue"))
  
     }
 }

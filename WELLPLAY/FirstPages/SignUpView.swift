@@ -18,6 +18,7 @@ struct SignUpView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @Environment(\.presentationMode) var mode
     
+    @State var errorMessage = ""
     @State var email = ""
     @State var password = ""
     @State private var userName = ""
@@ -39,13 +40,19 @@ struct SignUpView: View {
                            label: {} )
             
             VStack {
-                
                 Spacer()
                 Text("Let's create your profile!")
                     .font(.title)
                     .bold()
                     .foregroundColor(.white)
-                
+                VStack{
+                    Text(viewModel.errorMessage)
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(Color("CarrotColor"))
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
+                }.padding(.top)
                 VStack {
                     TextField("Email Address", text: $email)
                         .disableAutocorrection(true)
@@ -82,14 +89,14 @@ struct SignUpView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
                     
-                    TextField("Bio", text: $bio)
+                    TextField("Bio: write about yourself", text: $bio)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .padding()
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
                     
-                    TextField("Sport", text: $sports)
+                    TextField("List sports, separated by a comma", text: $sports)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .padding()
@@ -115,6 +122,7 @@ struct SignUpView: View {
                 NavigationLink("Have an account already?", destination: SignInView())
                     .padding()
                     .foregroundColor(Color("NoAccountYet"))
+                    .font(.system(size: 20, weight: .semibold))
                 
                 
             }.padding()

@@ -162,15 +162,15 @@ class AppViewModel: NSObject, ObservableObject {
         
                 if email != "" && password != ""{
         
-        auth.signIn(withEmail: email, password: password) {[weak self] result, error in
+        auth.signIn(withEmail: email, password: password) {result, error in
             if let error = error {
-                self?.errorMessage = "\(error.localizedDescription)"
+                self.errorMessage = "\(error.localizedDescription)"
                 print(error)
                 return
             }
             guard let user = result?.user else { return }
-            self?.userSession = user
-            self?.fetchUser()
+            self.userSession = user
+            self.fetchUser()
         }
                 } else {
  print ("Sign in is possible only when email and password are entered correctly")
