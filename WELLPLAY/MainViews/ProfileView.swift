@@ -151,43 +151,7 @@ struct ProfileView: View {
                         self.viewModel.fetchUsers()
                     }
                     
-                    
-                    VStack{
-
-                        Button(action: {
-                            
-                            viewModel.signout()
-                        }) {
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 280, height: 45)
-                                    .foregroundColor(Color(.lightGray))
-                                
-                                Text("Sign Out")
-                                    .font((.system(size: 15, weight: .semibold, design: .default))
-                                    )
-                            }
-                        }
-                        .padding(10)
-                        Button(action: {
-                            
-//                            viewModel.deleteUser()
-                            viewModel.signout()
-                        }) {
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(width: 280, height: 45)
-                                    .foregroundColor(Color(.lightGray))
-                                
-                                Text("Delete Account")
-                                    .font((.system(size: 15, weight: .semibold, design: .default))
-                                    )
-                            }
-                        }
-                        
-                    }.padding()
+                
                 }
                 .navigationBarHidden(false)
                 

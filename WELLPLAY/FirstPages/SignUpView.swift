@@ -46,7 +46,7 @@ struct SignUpView: View {
                     .bold()
                     .foregroundColor(.white)
                 VStack{
-                    Text(viewModel.errorMessage)
+                    Text(viewModel.errorMessage ?? "")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(Color("CarrotColor"))
                         .multilineTextAlignment(.leading)

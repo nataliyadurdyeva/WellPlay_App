@@ -82,11 +82,7 @@ struct AllConversationsView: View {
                         //                        self.viewModel.fetchMessages(message: message, reciever: selectedUser)
                         self.ChatViewIsActive.toggle()
                     } label:{
-                        //
-                        //                Divider()
-                        //                    .padding(.vertical, 8)
-                        //
-                        //
+
                         HStack(alignment: .top, spacing: 10) {
                             
                             
