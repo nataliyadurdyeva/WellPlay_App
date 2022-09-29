@@ -17,7 +17,7 @@ class AppViewModel: NSObject, ObservableObject {
     
     static let shared = AppViewModel()
     
-    @Published var errorMessage = ""
+    @Published var errorMessage: String? = ""
     @Published var messageToSetVisible: String?
     @Published var count = 0
     @Published var userSession: FirebaseAuth.User?
@@ -28,7 +28,7 @@ class AppViewModel: NSObject, ObservableObject {
     @Published var reciever: User?
     @Published var message: Message?
     @State private var fromId = ""
-    @State private var email = ""
+    @State var email = ""
     @State private var password = ""
   
     let db = Firestore.firestore()
@@ -162,15 +162,15 @@ class AppViewModel: NSObject, ObservableObject {
         
                 if email != "" && password != ""{
         
-        auth.signIn(withEmail: email, password: password) {[weak self] result, error in
+        auth.signIn(withEmail: email, password: password) {result, error in
             if let error = error {
-                self?.errorMessage = "\(error.localizedDescription)"
+                self.errorMessage = "\(error.localizedDescription)"
                 print(error)
                 return
             }
             guard let user = result?.user else { return }
-            self?.userSession = user
-            self?.fetchUser()
+            self.userSession = user
+            self.fetchUser()
         }
                 } else {
  print ("Sign in is possible only when email and password are entered correctly")
@@ -178,6 +178,19 @@ class AppViewModel: NSObject, ObservableObject {
                     }
             
     }
+    
+    func resetPassword(email: String, resetCompletion: @escaping (Result<Bool, Error>) -> Void)
+    {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+            if let error = error {
+                resetCompletion(.failure(error))
+//                print(error)
+//                return
+            } else {
+                resetCompletion(.success(true))
+            }
+            })
+        }
     
     func signUp(email: String, password: String, userName: String, age: String, location: String, sports: String, bio: String) {
         

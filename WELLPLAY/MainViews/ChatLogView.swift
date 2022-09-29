@@ -163,7 +163,6 @@ struct ChatLogView: View {
             }.navigationBarBackButtonHidden(true)
             
         }
-//        .offset(y: -25)
             .background(Color("DarkBlue").opacity(0.6))
     }
     
