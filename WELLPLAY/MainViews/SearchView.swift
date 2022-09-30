@@ -55,19 +55,12 @@ struct SearchView: View {
                     }
                     .alert("What do you want to do?", isPresented: $shouldShowLogOutOptions) {
                         Button("Sign Out", action: {viewModel.signout()})
+                        Button("Email Support", action: {email.send(openURL: openURL)})
                         Button("Delete Account", role: .destructive, action: {viewModel.deleteUser()})
                         Button("Cancel", role: .cancel, action: {})
                     }
                 } .background(Color("DarkBlue"))
-                Button {
-                    email.send(openURL: openURL)
-                } label: {
-                    HStack {
-                        Text("Email Support")
-                        Image(systemName: "envelope.circle.fill")
-                            .font(.title2)
-                    }
-                }
+
                 ZStack {
                     Rectangle()
                         .foregroundColor(searchRectangleColor)

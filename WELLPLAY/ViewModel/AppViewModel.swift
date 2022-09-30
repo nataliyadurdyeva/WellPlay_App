@@ -18,6 +18,9 @@ class AppViewModel: NSObject, ObservableObject {
     static let shared = AppViewModel()
     
     @Published var errorMessage: String? = ""
+   
+    
+    @Published var signInErrorMessage: String? = ""
     @Published var messageToSetVisible: String?
     @Published var count = 0
     @Published var userSession: FirebaseAuth.User?
@@ -45,8 +48,6 @@ class AppViewModel: NSObject, ObservableObject {
         tempCurrentUser = nil
         userSession = Auth.auth().currentUser
         fetchUser()
-        //        fetchMessages(message: message, reciever: reciever)
-        //     fetchRecentMessage()
     }
     
     func sendMessage(text: String, reciever: User?) {
@@ -164,7 +165,7 @@ class AppViewModel: NSObject, ObservableObject {
         
         auth.signIn(withEmail: email, password: password) {result, error in
             if let error = error {
-                self.errorMessage = "\(error.localizedDescription)"
+                self.signInErrorMessage = "\(error.localizedDescription)"
                 print(error)
                 return
             }
