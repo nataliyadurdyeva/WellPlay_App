@@ -18,7 +18,7 @@ struct SignInView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @State var email = ""
     @State var password = ""
-//    @State private var errorMessage = ""
+    @State private var signInErrorMessage = ""
 //    @State private var isShowingResetPassworView = false
     
     
@@ -31,15 +31,15 @@ struct SignInView: View {
                     .bold()
                     .foregroundColor(.white)
                     .padding()
-                //
-                //            VStack{
-                //                Text(viewModel.errorMessage)
-                //                    .font(.system(size: 20, weight: .semibold))
-                //                    .foregroundColor(Color("CarrotColor"))
-                //                    .multilineTextAlignment(.leading)
-                //                    .fixedSize(horizontal: false, vertical: true)
-                //                    .lineLimit(nil)
-                //            }.padding(.top)
+                
+                            VStack{
+                                Text(viewModel.signInErrorMessage ?? "")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(Color("CarrotColor"))
+                                    .multilineTextAlignment(.leading)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(nil)
+                            }.padding(.top)
                 
                 VStack {
                     TextField("Email Address", text: $email)

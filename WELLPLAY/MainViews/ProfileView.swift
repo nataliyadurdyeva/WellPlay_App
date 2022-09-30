@@ -123,11 +123,12 @@ struct ProfileView: View {
                                 .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
                                     
                                 })
-                            }
-                            Spacer(minLength: 8)
+                            }.padding(8)
+                      
                             Text("Your bio:")
                                 .font(.system(size:25)).fontWeight(Font.Weight.medium)
                                 .foregroundColor(.white)
+                                .padding(10)
                             HStack {
                                 Text(viewModel.currentUser?.bio ?? self.bio)
                                     .font(.system(size:18)).fontWeight(Font.Weight.light)
@@ -145,7 +146,8 @@ struct ProfileView: View {
                                 
                             }
                             
-                        }.padding()
+                        }
+                        Spacer()
                         
                     }.onAppear() {
                         self.viewModel.fetchUsers()
