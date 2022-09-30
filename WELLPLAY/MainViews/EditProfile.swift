@@ -14,7 +14,7 @@ struct EditNameView: View {
     
     @ObservedObject var viewModel = AppViewModel()
 
-    @State  var userName = ""
+    @State private var userName = ""
     
     @Environment(\.dismiss) private var dismiss
     

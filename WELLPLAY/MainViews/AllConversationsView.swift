@@ -12,15 +12,15 @@ struct AllConversationsView: View {
     
     @State var ChatViewIsActive: Bool = false
     @State var messages: Message?
-    @State private var senderProfilePictureUrl = ""
-    @State private var profilePictureUrl = ""
-    @State private var userName = ""
-    @State private var recieverUserName = ""
-    @State private var senderUserName = ""
+    @State var senderProfilePictureUrl = ""
+    @State var profilePictureUrl = ""
+    @State var userName = ""
+    @State var recieverUserName = ""
+    @State var senderUserName = ""
     @State var shouldShowLogOutOptions = false
     @State var reciever: User?
-    
-    
+   
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -128,6 +128,7 @@ struct AllConversationsView: View {
             
         }.onAppear(){
             viewModel.fetchRecentMessage()
+            viewModel.fetchUser()
         }
         
     }

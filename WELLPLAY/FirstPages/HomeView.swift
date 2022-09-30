@@ -38,26 +38,20 @@ struct HomeView: View {
         TabView(selection: $selectedIndex) {
             
             SearchView()
-                .onTapGesture {
-                    selectedIndex = 0
-                }
+                
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     
                 }.tag(0)
             
             ProfileView()
-                .onTapGesture {
-                    selectedIndex = 1
-                }
+                
                 .tabItem {
                     Image(systemName: "person")
                 }.tag(1)
             
             AllConversationsView()
-                .onTapGesture {
-                    selectedIndex = 2
-                }
+                 
                 .tabItem {
                     Image(systemName: "message")
                 }.tag(2)
