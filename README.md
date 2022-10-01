@@ -1,7 +1,5 @@
 # WellPlay App
-![basketball (50 × 50 px)](https://user-images.githubusercontent.com/107269455/193403533-9463fa96-dbe0-450f-9f43-61117bad2bae.png)
-
-
+![basketball (10 × 10 px)](https://user-images.githubusercontent.com/107269455/193403533-9463fa96-dbe0-450f-9f43-61117bad2bae.png)
 
 ### Summary
 
