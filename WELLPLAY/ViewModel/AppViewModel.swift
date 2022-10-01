@@ -17,31 +17,40 @@ class AppViewModel: NSObject, ObservableObject {
     
     static let shared = AppViewModel()
     
-    @Published var errorMessage: String? = ""
-   
+    //MARK: Error messages:
     
+    @Published var errorMessage: String? = ""
     @Published var signInErrorMessage: String? = ""
-    @Published var messageToSetVisible: String?
-    @Published var count = 0
+    
+    
+    
+    
+    //MARK: User variables
     @Published var userSession: FirebaseAuth.User?
-    @Published var didAuthenticateUser = false
     @Published var currentUser: User?
-    @Published var didRegister = false
     @Published var users = [User]()
+    
+    //MARK: Message variables
+    
+    @Published var messages = [Message]()
     @Published var reciever: User?
     @Published var message: Message?
     @State private var fromId = ""
-    @State var email = ""
-    @State private var password = ""
-  
-    let db = Firestore.firestore()
-    
-    @Published var messages = [Message]()
-    
+    @Published var count = 0
     @State var isShowingNewMessageView = false
     @State var showChatView = false
     @State var text = ""
+    
+    //MARK: Authentication variables
+    
+    @Published var didRegister = false
+    @Published var didAuthenticateUser = false
+    @State var email = ""
+    @State private var password = ""
     private var tempCurrentUser: FirebaseAuth.User?
+    let db = Firestore.firestore()
+    
+    //MARK: Initializers
     
     override init() {
         super.init()
@@ -50,8 +59,11 @@ class AppViewModel: NSObject, ObservableObject {
         fetchUser()
     }
     
+    //MARK: *************************************************************************************************//
+    
+    //MARK: Message functions
+    
     func sendMessage(text: String, reciever: User?) {
-        
         
         guard let fromID = self.currentUser?.id else { return }
         guard let toID = reciever?.id else { return }
@@ -129,12 +141,10 @@ class AppViewModel: NSObject, ObservableObject {
                 self.count += 1
             }
         }
-        
     }
     
     func fetchRecentMessage() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
         
         let query = Firestore.firestore().collection("messages")
             .document(currentUid)
@@ -149,49 +159,43 @@ class AppViewModel: NSObject, ObservableObject {
                 
                 let data = QueryDocumentSnapshot.data()
                 return Message(data: data)
-                
             }
         }
-        
-        
     }
     
+    //MARK: Authorization functions
     
     func signIn(email: String, password: String) {
         
         let auth = Auth.auth()
         
-                if email != "" && password != ""{
-        
-        auth.signIn(withEmail: email, password: password) {result, error in
-            if let error = error {
-                self.signInErrorMessage = "\(error.localizedDescription)"
-                print(error)
-                return
-            }
-            guard let user = result?.user else { return }
-            self.userSession = user
-            self.fetchUser()
-        }
-                } else {
- print ("Sign in is possible only when email and password are entered correctly")
-                        return
-                    }
+        if email != "" && password != ""{
             
+            auth.signIn(withEmail: email, password: password) {result, error in
+                if let error = error {
+                    self.signInErrorMessage = "\(error.localizedDescription)"
+                    print(error)
+                    return
+                }
+                guard let user = result?.user else { return }
+                self.userSession = user
+                self.fetchUser()
+            }
+        } else {
+            print ("Sign in is possible only when email and password are entered correctly")
+            return
+        }
     }
     
-    func resetPassword(email: String, resetCompletion: @escaping (Result<Bool, Error>) -> Void)
-    {
+    func resetPassword(email: String, resetCompletion: @escaping (Result<Bool, Error>) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
             if let error = error {
                 resetCompletion(.failure(error))
-//                print(error)
-//                return
             } else {
                 resetCompletion(.success(true))
             }
-            })
-        }
+        })
+    }
     
     func signUp(email: String, password: String, userName: String, age: String, location: String, sports: String, bio: String) {
         
@@ -224,7 +228,6 @@ class AppViewModel: NSObject, ObservableObject {
                     self.didRegister = true
                 }
         }
-        
     }
     
     
@@ -234,31 +237,7 @@ class AppViewModel: NSObject, ObservableObject {
         try? Auth.auth().signOut()
     }
     
-    
-//    func verify(){
-//
-//        if email != "" && password != ""{
-//
-//            Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
-//
-//                if err != nil{
-//
-//                    self.errorMessage = errorMessage.localizedDescription
-//                    self.alert.toggle()
-//                    return
-//                }
-//
-//                print("success")
-//                UserDefaults.standard.set(true, forKey: "status")
-//                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-//            }
-//        }
-//        else{
-//
-//            self.error = "Please fill all the contents properly"
-//            self.alert.toggle()
-//        }
-//    }
+    //MARK: User functions
     
     func fetchUsers() {
         let db = Firestore.firestore()
@@ -287,9 +266,7 @@ class AppViewModel: NSObject, ObservableObject {
         
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
-        let docUpdate = db.collection("users").document(userId)
-            
-        
+        let docUpdate = Firestore.firestore().collection("users").document(userId)
         let data: [String: Any] = [
             "userName": userName,
             "age": age
@@ -303,7 +280,7 @@ class AppViewModel: NSObject, ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
         let docUpdate = db.collection("users").document(userId)
-            
+        
         
         let data: [String: Any] = [
             "userName": userName
@@ -318,7 +295,7 @@ class AppViewModel: NSObject, ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
         let docUpdate = db.collection("users").document(userId)
-            
+        
         
         let data: [String: Any] = [
             "age": age
@@ -333,7 +310,7 @@ class AppViewModel: NSObject, ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
         let docUpdate = db.collection("users").document(userId)
-            
+        
         
         let data: [String: Any] = [
             "location": location
@@ -348,7 +325,7 @@ class AppViewModel: NSObject, ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
         let docUpdate = db.collection("users").document(userId)
-            
+        
         
         let data: [String: Any] = [
             "sports": sports
@@ -363,7 +340,7 @@ class AppViewModel: NSObject, ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
         let docUpdate = db.collection("users").document(userId)
-            
+        
         
         let data: [String: Any] = [
             "bio": bio
@@ -380,24 +357,12 @@ class AppViewModel: NSObject, ObservableObject {
         db.collection("users")
             .document(userId)
             .delete() { error in
-          if let error = error {
-            print("Error deleting user: \(error)")
-          } else {
-              print("User deleted")
-          }
-        }
-        
-//
-//        db.collection("messages")
-//            .document(userId)
-//            .delete() { error in
-//          if let error = error {
-//            print("Error deleting messages: \(error)")
-//          } else {
-//              print("Messages deleted")
-//          }
-//        }
-        
+                if let error = error {
+                    print("Error deleting user: \(error)")
+                } else {
+                    print("User deleted")
+                }
+            }
         let user = Auth.auth().currentUser
         user?.delete()
         self.signout()
@@ -429,14 +394,6 @@ class AppViewModel: NSObject, ObservableObject {
         }
     }
     
-    func fetchRecentUser() {
-        guard let uid = message?.fromId else {return}
-        
-        UserService.fetchUser(withUid: uid) {user in
-            
-            self.reciever = user
-        }
-    }
     
     struct UserService {
         
@@ -454,7 +411,4 @@ class AppViewModel: NSObject, ObservableObject {
                 }
         }
     }
-    
-
-    
 }

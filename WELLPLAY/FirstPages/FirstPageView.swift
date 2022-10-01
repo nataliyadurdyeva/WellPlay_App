@@ -21,15 +21,15 @@ struct FirstPageView: View {
         NavigationView {
             
             VStack(alignment:. leading, spacing: 30) {
-                Text("FIND FRIENDS \nTO DO ACTIVITIES \nWITH YOU!")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding()
+//                Text("FIND FRIENDS \nTO DO ACTIVITIES \nWITH YOU!")
+//                    .font(.largeTitle)
+//                    .bold()
+//                    .foregroundColor(.white)
+//                    .padding()
                 Group {
                     HStack {
-                        NavigationLink(destination: SignInView(), label: {
-                            Text("Sign In")
+                        NavigationLink(destination: SignUpView(), label: {
+                            Text("Sign Up")
                                 .bold()
                                 .frame(maxWidth: 400, maxHeight: 40)
                                 .background(Color.black)
@@ -37,9 +37,8 @@ struct FirstPageView: View {
                                 .cornerRadius(10)
                         })
                         .padding()
-                        
-                        NavigationLink(destination: SignUpView(), label: {
-                            Text("Sign Up")
+                        NavigationLink(destination: SignInView(), label: {
+                            Text("Sign In")
                                 .bold()
                                 .frame(maxWidth: 400, maxHeight: 40)
                                 .background(Color.white)
@@ -51,7 +50,7 @@ struct FirstPageView: View {
                 } .frame(maxHeight: .infinity, alignment: .bottom)
 
             }
-            .background(Image("friends_fiests_bike")
+            .background(Image("bikes_fiests_darker")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

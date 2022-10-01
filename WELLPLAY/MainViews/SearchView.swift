@@ -57,6 +57,7 @@ struct SearchView: View {
                         Button("Sign Out", action: {viewModel.signout()})
                         Button("Email Support", action: {email.send(openURL: openURL)})
                         Button("Delete Account", role: .destructive, action: {viewModel.deleteUser()})
+                        Link("Donate WellPlay creator", destination: URL(string: "https://www.paypal.me/NataliyaDurdyeva")!)
                         Button("Cancel", role: .cancel, action: {})
                     }
                 } .background(Color("DarkBlue"))
@@ -100,13 +101,6 @@ struct SearchView: View {
             .background(Color("DarkBlue"))
             
         }
-//        .navigationBarHidden(true)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//
-//                }
-//
-//            }
     }
     
     struct SearchCell: View {
