@@ -19,7 +19,7 @@ struct SearchView: View {
         
     }
     
-    private var email = SupportEmail(toAddress: "natalyadu@gmail.com", subject: "Support Email", messageHeader: "Please describe your issue below")
+    private var email = SupportEmail(toAddress: "appwellplay@gmail.com", subject: "Support Email", messageHeader: "Please describe your issue below")
     @State private var userName = ""
     @State private var age = ""
     @State private var location = ""
@@ -189,7 +189,7 @@ struct SearchView: View {
         let subject: String
         let messageHeader: String
         var body: String {"""
-If you are reporting user please tell us their username and the reason you are reporting them. Thank you!
+If you are reporting user please tell us their username, age, location and the reason you are reporting them. Thank you!
 \(messageHeader)
 ------------------------------------------------------------
 """}
