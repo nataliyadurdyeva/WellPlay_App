@@ -1,6 +1,6 @@
 # WellPlay App
 
-<img src="https://user-images.githubusercontent.com/107269455/193403533-9463fa96-dbe0-450f-9f43-61117bad2bae.png" width="150" height="150">
+<img src="https://user-images.githubusercontent.com/107269455/193403533-9463fa96-dbe0-450f-9f43-61117bad2bae.png" width="250" height="250">
 
 ### Summary
 
@@ -37,8 +37,8 @@ The App is going to be on AppStore Shortly available for free download.
 
 ### TODO
 
-- Set up and search by users' availability (date and time of the day)
-- Set up and search withing distance radius (kilometers or miles)
+- Search by users' availability (date and time of the day)
+- Search up and search withing distance radius (kilometers or miles)
 - Advanced filtering by preffered types of sports
 - Create and chat in Group Chats
 - Read/Unread status for messages
