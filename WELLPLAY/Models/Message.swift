@@ -13,7 +13,6 @@ struct Message: Identifiable, Hashable, Decodable {
   
     @DocumentID var id: String?
 
-//    var documentID: String
     var fromId: String
     var toId: String
     var timestamp = Date()
@@ -27,7 +26,6 @@ struct Message: Identifiable, Hashable, Decodable {
   
 
     init(data: [String: Any]) {
-//        self.documentID = documentID
         self.user = data[FirebaseConstants.user] as? User
         self.fromId = data[FirebaseConstants.fromId] as? String ?? ""
         self.toId = data[FirebaseConstants.toId] as? String ?? ""

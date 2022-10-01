@@ -19,8 +19,8 @@ struct AllConversationsView: View {
     @State var senderUserName = ""
     @State var shouldShowLogOutOptions = false
     @State var reciever: User?
-   
-
+    
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,14 +40,10 @@ struct AllConversationsView: View {
                         ChatLogView(reciever: reciever)
                     }
                 }
-                //                .overlay(
-                //                    newMessageButton, alignment: .bottom)
+                
                 .navigationBarTitleDisplayMode(.inline)
-                
-                
             }
         }
-//                .offset(y: -200)
     }
     private var messagesView: some View {
         
@@ -79,10 +75,9 @@ struct AllConversationsView: View {
                             }
                         }()
                         self.reciever = selectedUser
-                        //                        self.viewModel.fetchMessages(message: message, reciever: selectedUser)
                         self.ChatViewIsActive.toggle()
                     } label:{
-
+                        
                         HStack(alignment: .top, spacing: 10) {
                             
                             
@@ -113,7 +108,6 @@ struct AllConversationsView: View {
                                         .foregroundColor(Color(.lightGray))
                                 }
                                 
-                                //                        NavigationLink(destination: ChatLogView(reciever: selectedUser)){
                                 Text(message.text)
                                 
                                     .font(.system(size: 16))
@@ -130,15 +124,12 @@ struct AllConversationsView: View {
             viewModel.fetchRecentMessage()
             viewModel.fetchUser()
         }
-        
     }
     
     
     private var customNavBar: some View {
         
-        
         VStack (alignment: .leading) {
-            
             
             HStack  (alignment: .top, spacing: 20){
                 
@@ -186,12 +177,8 @@ struct AllConversationsView: View {
                     .cancel()
                 ])
             }
-            
         }
-        
     }
-    
-    
     
 }
 

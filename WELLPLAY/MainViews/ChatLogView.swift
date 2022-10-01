@@ -26,8 +26,7 @@ struct ChatLogView: View {
     let notSelected = Color(red: 0.68, green: 0.81, blue: 0.92)
     
     static let emptyScrollToString = "Empty"
-    //    @State private var timeStamp = ""
-    //    @State private var read = false
+    
     
     init(reciever: User?) {
         self.reciever = reciever
@@ -119,9 +118,6 @@ struct ChatLogView: View {
                         }
                     }
                 }
-                //            .background(Color(.init(white: 0.95, alpha: 1)))
-                //            .background(Color("DarkBlue").opacity(0.7))
-                //                .safeAreaInset(edge: .bottom)
                 
                 VStack {
                     
@@ -137,7 +133,7 @@ struct ChatLogView: View {
                             .textFieldStyle(PlainTextFieldStyle())
                         
                         //                        .font(.body)
-                            .frame(height: 30)
+                            .frame(height: 50)
                             .disableAutocorrection(true)
                         
                         Button(action: {
@@ -163,12 +159,11 @@ struct ChatLogView: View {
             }.navigationBarBackButtonHidden(true)
             
         }
-            .background(Color("DarkBlue").opacity(0.6))
+        .background(Color("DarkBlue").opacity(0.6))
     }
     
 }
 
-//MARK: // NON CLASS STRUCTS
 
 struct CustomTextField: View {
     var placeholder: Text
@@ -187,18 +182,6 @@ struct CustomTextField: View {
         }
     }
 }
-
-
-//struct MessageViewModel {
-//    
-//    @ObservedObject var viewModel: AppViewModel
-//    let message: Message
-//    
-//    var currentUid: String { return viewModel.userSession.uid ?? "" }
-//    
-//    var isFromCurrentUser: Bool { return message.fromId == currentUid }
-//}
-
 
 struct ChatBubble: Shape {
     var isFromCurrentUser: Bool

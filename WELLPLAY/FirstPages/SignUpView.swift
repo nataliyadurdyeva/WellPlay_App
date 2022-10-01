@@ -42,8 +42,10 @@ struct SignUpView: View {
             VStack {
                 Spacer()
                 Text("Let's create your profile!")
-                    .font(.title)
-                    .bold()
+                    .font(.system(size: 30, weight: .semibold))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                
                     .foregroundColor(.white)
                 VStack{
                     Text(viewModel.errorMessage ?? "")
@@ -114,11 +116,13 @@ struct SignUpView: View {
                     
                 }, label: {
                     Text("Create Account")
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .fontWeight(.bold)
                         .frame(width: 320, height: 40)
-                        .background(Color("sendAnInvite_button_light_brown"))
+                    
+                        .background(Color("FancyGreen").opacity(0.6))
                 }).cornerRadius(40)
+                    .shadow(color: .black, radius: 2, x: 0, y: 2)
                 NavigationLink("Have an account already?", destination: SignInView())
                     .padding()
                     .foregroundColor(Color("NoAccountYet"))
@@ -133,14 +137,12 @@ struct SignUpView: View {
                 })
                 .padding(10)
             
-            
         }.navigationBarHidden(true)
             .offset(y: 30)
             .background(Color("DarkBlue"))
-        .onAppear(perform: {
-            viewModel.didRegister = false
-        })
-        
+            .onAppear(perform: {
+                viewModel.didRegister = false
+            })
     }
 }
 

@@ -21,11 +21,7 @@ struct FirstPageView: View {
         NavigationView {
             
             VStack(alignment:. leading, spacing: 30) {
-//                Text("FIND FRIENDS \nTO DO ACTIVITIES \nWITH YOU!")
-//                    .font(.largeTitle)
-//                    .bold()
-//                    .foregroundColor(.white)
-//                    .padding()
+                
                 Group {
                     HStack {
                         NavigationLink(destination: SignUpView(), label: {
@@ -48,7 +44,7 @@ struct FirstPageView: View {
                         .padding()
                     }
                 } .frame(maxHeight: .infinity, alignment: .bottom)
-
+                
             }
             .background(Image("bikes_fiests_darker")
                 .resizable()
@@ -57,8 +53,7 @@ struct FirstPageView: View {
                 .edgesIgnoringSafeArea(.all)
             )
         }
-    }
-    
+    }   
 }
 
 
