@@ -21,7 +21,7 @@ struct ProfileView: View {
         
         
         self.viewModel = AppViewModel()
- 
+        
     }
     
     @State private var isShowingEditName: Bool = false
@@ -62,7 +62,7 @@ struct ProfileView: View {
                             .foregroundColor(.white)
                         Button(action: { isShowingEditName.toggle() }, label: {
                             Image(systemName: "pencil.circle")
-                                .font(.system(size: 10))
+                                .font(.system(size: 15))
                                 .foregroundColor(.gray)
                         })
                         .sheet(isPresented: $isShowingEditName, content: { EditNameView()
@@ -76,7 +76,7 @@ struct ProfileView: View {
                             .foregroundColor(.white)
                         Button(action: { isShowingEditAge.toggle() }, label: {
                             Image(systemName: "pencil.circle")
-                                .font(.system(size: 10))
+                                .font(.system(size: 15))
                                 .foregroundColor(.gray)
                         })
                         .sheet(isPresented: $isShowingEditAge, content: { EditAgeView()
@@ -89,7 +89,7 @@ struct ProfileView: View {
                             .foregroundColor(.white)
                         Button(action: { isShowingEditLocation.toggle() }, label: {
                             Image(systemName: "pencil.circle")
-                                .font(.system(size: 10))
+                                .font(.system(size: 15))
                                 .foregroundColor(.gray)
                         })
                         .sheet(isPresented: $isShowingEditLocation, content: { EditLocationView()
@@ -97,50 +97,57 @@ struct ProfileView: View {
                     }
                     
                     VStack {
-                        Spacer()
-                    HStack {
-                        Text("Your bio:")
-                            .font(.system(size:25)).fontWeight(Font.Weight.medium)
-                            .foregroundColor(.white)
                         
-                        Button(action: { isShowingEditBio.toggle() }, label: {
-                            Image(systemName: "pencil.circle")
-                                .font(.system(size: 10))
-                                .foregroundColor(.gray)
+                        HStack {
+                            Text("Your bio:")
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
                             
-                        })
-                        .sheet(isPresented: $isShowingEditBio, content: { EditBioView()
-                            
-                        })
-                    }
+                            Button(action: { isShowingEditBio.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditBio, content: { EditBioView()
+                                
+                            })
+                        }
+                        
+                        VStack {
+                            Text(viewModel.currentUser?.bio ?? self.bio)
+                                .font(.system(size:18)).fontWeight(Font.Weight.light)
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }.padding(20)
                     
                     VStack {
-                        Text(viewModel.currentUser?.bio ?? self.bio)
-                            .font(.system(size:18)).fontWeight(Font.Weight.light)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.leading)
-                    }.padding(15)
-                }
-                                HStack{
-                                    Text("Your current sports:")
-                                        .font(.system(size:25)).fontWeight(Font.Weight.medium)
-                                        .foregroundColor(.white)
-                                    Button(action: { isShowingEditSports.toggle() }, label: {
-                                        Image(systemName: "pencil.circle")
-                                            .font(.system(size: 10))
-                                            .foregroundColor(.gray)
-                                    })
-                                    .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
-                                        
-                                    })
-                                }
-                    VStack {
-                                Text(viewModel.currentUser?.sports ?? self.sports)
-                                    .foregroundColor(.white)
-                                    .font(.system(size:18)).fontWeight(Font.Weight.light)
- 
-                        } .padding(15)
-                 Spacer()
+                        
+                        HStack{
+                            Text("Your current sports:")
+                                .font(.system(size:25)).fontWeight(Font.Weight.medium)
+                                .foregroundColor(.white)
+                            
+                            Button(action: { isShowingEditSports.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.gray)
+                            })
+                            .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
+                            })
+                        }
+                        
+                        VStack {
+                            Text(viewModel.currentUser?.sports ?? self.sports)
+                                .foregroundColor(.white)
+                                .font(.system(size:18)).fontWeight(Font.Weight.light)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }.padding(20)
+                    
+                    Spacer()
+                    
                 }
                 .navigationBarHidden(false)
                 .onAppear() {

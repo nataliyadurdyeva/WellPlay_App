@@ -17,7 +17,6 @@ struct ZeroPageView: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        //                if viewModel.didAuthenticateUser != true {
         
         if viewModel.userSession != nil  {
             HomeView()
@@ -25,7 +24,7 @@ struct ZeroPageView: View {
         else {
             FirstPageView()
         }
- 
+        
     }
 }
 

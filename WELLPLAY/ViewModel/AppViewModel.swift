@@ -22,9 +22,6 @@ class AppViewModel: NSObject, ObservableObject {
     @Published var errorMessage: String? = ""
     @Published var signInErrorMessage: String? = ""
     
-    
-    
-    
     //MARK: User variables
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
