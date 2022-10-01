@@ -38,36 +38,31 @@ struct HomeView: View {
         TabView(selection: $selectedIndex) {
             
             SearchView()
-                
+            
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     
                 }.tag(0)
             
             ProfileView()
-                
+            
                 .tabItem {
                     Image(systemName: "person")
                 }.tag(1)
             
             AllConversationsView()
-                 
+            
                 .tabItem {
                     Image(systemName: "message")
                 }.tag(2)
         }.accentColor(rgbColor).imageScale(.large)
             .onAppear{
                 
-                    let tabBarAppearance = UITabBarAppearance()
-                    tabBarAppearance.backgroundColor = .init(named: "DarkBlue")
-                    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-                
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.backgroundColor = .init(named: "DarkBlue")
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
             }
-//            .onAppear{
-//                UITabBar.appearance().barTintColor = .init(named: "DarkBlue")
-//            }
     }
-    
 }
 
 
