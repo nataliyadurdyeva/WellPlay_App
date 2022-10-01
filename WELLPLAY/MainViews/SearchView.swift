@@ -11,6 +11,7 @@ import Kingfisher
 import UIKit
 
 struct SearchView: View {
+    
     @EnvironmentObject private var viewModel: AppViewModel
     
     init() {
@@ -28,8 +29,7 @@ struct SearchView: View {
     @State var shouldShowLogOutOptions = false
     @Environment(\.openURL) var openURL
     let searchRectangleColor = Color(red: 0.68, green: 0.81, blue: 0.92)
-    //    var user: User?
-    
+
     var filteredUsers: [User] {
         if searchText.isEmpty {
             return viewModel.users
@@ -41,6 +41,8 @@ struct SearchView: View {
     var body: some View {
         
         NavigationView {
+            
+//MARK: Navigation bar
             
             VStack {
                 HStack (alignment: .bottom) {
@@ -55,13 +57,15 @@ struct SearchView: View {
                     }
                     .alert("What do you want to do?", isPresented: $shouldShowLogOutOptions) {
                         Button("Sign Out", action: {viewModel.signout()})
+                        Link("Donate WellPlay creator", destination: URL(string: "https://www.paypal.me/NataliyaDurdyeva")!)
                         Button("Email Support", action: {email.send(openURL: openURL)})
                         Button("Delete Account", role: .destructive, action: {viewModel.deleteUser()})
-                        Link("Donate WellPlay creator", destination: URL(string: "https://www.paypal.me/NataliyaDurdyeva")!)
                         Button("Cancel", role: .cancel, action: {})
                     }
                 } .background(Color("DarkBlue"))
-
+                
+  //MARK: SEARCH BAR
+                
                 ZStack {
                     Rectangle()
                         .foregroundColor(searchRectangleColor)
@@ -75,6 +79,8 @@ struct SearchView: View {
                 } .frame(height: 40)
                     .cornerRadius(13)
                     .padding()
+                
+ //MARK: LIST OF USERS
                 
                 VStack {
                     
@@ -102,6 +108,8 @@ struct SearchView: View {
             
         }
     }
+    
+ //MARK: CUSTOM CELL
     
     struct SearchCell: View {
         
@@ -184,6 +192,8 @@ struct SearchView: View {
         }
     }
     
+    
+//MARK: FORMATTING EMAIL
     struct SupportEmail {
         let toAddress: String
         let subject: String
