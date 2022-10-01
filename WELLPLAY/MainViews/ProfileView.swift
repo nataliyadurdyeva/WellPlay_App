@@ -56,7 +56,7 @@ struct ProfileView: View {
                         KFImage(URL(string: viewModel.currentUser?.profilePictureUrl ?? self.profilePictureUrl))
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 150, height: 150)
+                            .frame(width: 250, height: 250)
                             .clipShape(Circle())
                             .cornerRadius(20)
                         HStack {
@@ -104,47 +104,53 @@ struct ProfileView: View {
                             })
                             
                         }
-                        
+                        Spacer()
                         VStack {
-                            
+                            HStack{
                             Text("Your current sports:")
                                 .font(.system(size:25)).fontWeight(Font.Weight.medium)
                                 .foregroundColor(.white)
+                            Button(action: { isShowingEditSports.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
+                                
+                            })
+                        }
                             HStack {
                                 Text(viewModel.currentUser?.sports ?? self.sports)
                                     .foregroundColor(.white)
                                     .font(.system(size:18)).fontWeight(Font.Weight.light)
-                                Button(action: { isShowingEditSports.toggle() }, label: {
-                                    Image(systemName: "pencil.circle")
-                                        .font(.system(size: 10))
-                                        .foregroundColor(.gray)
-                                    
-                                })
-                                .sheet(isPresented: $isShowingEditSports, content: { EditSportsView()
-                                    
-                                })
+                               
                             }.padding(8)
-                      
+                            
+                            HStack {
                             Text("Your bio:")
                                 .font(.system(size:25)).fontWeight(Font.Weight.medium)
                                 .foregroundColor(.white)
                                 .padding(10)
-                            HStack {
+                            
+                            Button(action: { isShowingEditBio.toggle() }, label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                
+                            })
+                            .sheet(isPresented: $isShowingEditBio, content: { EditBioView()
+                                
+                            })
+                        }
+                            VStack (alignment: .leading){
                                 Text(viewModel.currentUser?.bio ?? self.bio)
                                     .font(.system(size:18)).fontWeight(Font.Weight.light)
                                     .foregroundColor(.white)
                                     .multilineTextAlignment(.leading)
-                                Button(action: { isShowingEditBio.toggle() }, label: {
-                                    Image(systemName: "pencil.circle")
-                                        .font(.system(size: 10))
-                                        .foregroundColor(.gray)
-                                    
-                                })
-                                .sheet(isPresented: $isShowingEditBio, content: { EditBioView()
-                                    
-                                })
+                               
                                 
-                            }
+                            }.padding(20)
                             
                         }
                         Spacer()
