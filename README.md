@@ -1,8 +1,6 @@
 # WellPlay App
 
-
-
-![logo_wellplay-removebg-preview (1)](https://user-images.githubusercontent.com/107269455/193403440-3149f4cb-da84-4647-92fd-8f62d29164ef.png)
+![basketball (180 × 180 px) (1024 × 1024 px)](https://user-images.githubusercontent.com/107269455/193403459-01517d6d-e864-4b5b-b858-3a78a16f53e4.png)
 
 
 ### Summary
