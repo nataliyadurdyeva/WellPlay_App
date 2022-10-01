@@ -5,7 +5,7 @@
 
 ### Summary
 
-WellPlay is a social platform connecting you with people in your area to do fitness activities that you enjoy: yoga, tennis, climbing, biking, jogging, and many others. Use search bar to filter users' profiles by their preffered activity, and message each user to discuss logistics of meeting up.
+WellPlay is a social platform connecting you with people in your area to do fitness activities that you enjoy: yoga, tennis, climbing, biking, jogging, and many others. Use the search bar to filter users' profiles by their preferred activity, and message each user to discuss the logistics of meeting up.
 
 ### About the Developer
 
