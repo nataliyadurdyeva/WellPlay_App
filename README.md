@@ -38,6 +38,8 @@ The App is going to be on AppStore Shortly available for free download.
 
 ### TODO
 
+- Support device rotation
+- Support Dark Mode
 - Search by users' availability (date and time of the day)
 - Search up and search withing distance radius (kilometers or miles)
 - Advanced filtering by preffered types of sports
