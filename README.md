@@ -30,7 +30,7 @@ Browse other users in your city and use Search Bar to filter users by their pref
 
 Message the selected user to discuss logistics of meeting up
 
-<img src="https://user-images.githubusercontent.com/107269455/191103525-2626e65c-177a-4553-a7a2-149fa9899838.gif" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/107269455/191103525-2626e65c-177a-4553-a7a2-149fa9899838.gif" width="400" height="400">
 
 ### Setup/Installation
 
