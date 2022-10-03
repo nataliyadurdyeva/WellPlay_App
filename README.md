@@ -1,6 +1,6 @@
 # WellPlay App
 
-<img src="https://user-images.githubusercontent.com/107269455/193426658-dee438f1-f29b-404c-8a72-eeb90b2c14c7.png" width="250" height="250">
+<img src="https://user-images.githubusercontent.com/107269455/193426658-dee438f1-f29b-404c-8a72-eeb90b2c14c7.png" width="50" height="250">
 
 
 ### Summary
