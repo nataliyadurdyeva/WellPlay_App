@@ -45,6 +45,10 @@ Email support (e.g to report a user), Sign Out or Delete the user (email, passwo
 
 <img src="https://user-images.githubusercontent.com/107269455/193507318-7ab41b83-50bf-437d-b75a-536d84e22c5c.gif" width="250" height="550">
 
+Reset password via email:
+
+<img src="https://user-images.githubusercontent.com/107269455/193507565-5320964b-640c-453f-b2e3-04474178dc5b.gif" width="250" height="550">
+
 
 ### Setup/Installation
 
