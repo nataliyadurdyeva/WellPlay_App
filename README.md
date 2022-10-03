@@ -35,7 +35,7 @@ Message the selected user to discuss logistics of meeting up
 
 See a list of All Conversations and continue chatting by selecting one recent conversation:
 
-<img src="https://user-images.githubusercontent.com/107269455/193507010-989d65b4-8406-45fb-b1ed-fa67a9dc2f14.gif" width="550" height="550">
+<img src="https://user-images.githubusercontent.com/107269455/193507010-989d65b4-8406-45fb-b1ed-fa67a9dc2f14.gif" width="250" height="550">
 
 Update your profile in real time:
 
