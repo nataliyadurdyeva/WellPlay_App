@@ -25,12 +25,12 @@ Create an account with: emails, password, profile photo, name, age, bio, preffer
 
 Browse other users in your city and use Search Bar to filter users by their preferred list of sports
 
-![WellPlayBrowseSearch](https://user-images.githubusercontent.com/107269455/191108200-de4a9f24-c667-41c8-8f01-631564aff7a4.gif)
+<img src="https://user-images.githubusercontent.com/107269455/191108200-de4a9f24-c667-41c8-8f01-631564aff7a4.gif" width="200" height="400">
 
 
 Message the selected user to discuss logistics of meeting up
 
-<img src="https://user-images.githubusercontent.com/107269455/191103525-2626e65c-177a-4553-a7a2-149fa9899838.gif" width="400" height="400">
+<img src="https://user-images.githubusercontent.com/107269455/191103525-2626e65c-177a-4553-a7a2-149fa9899838.gif" width="550" height="550">
 
 ### Setup/Installation
 
