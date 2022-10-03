@@ -35,6 +35,7 @@ See a list of All Conversations and continue chatting by selecting one recent co
 
 Update your profile in real time:
 
+<img src="https://user-images.githubusercontent.com/107269455/193506188-48b1c54a-1a0b-4fb5-b3dd-f58f8381f119.gif width="250" height="500">
 
 Email support (e.g to report a user):
 
