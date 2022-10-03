@@ -1,10 +1,11 @@
 # WellPlay App
 
-<img src="https://user-images.githubusercontent.com/107269455/193403533-9463fa96-dbe0-450f-9f43-61117bad2bae.png" width="250" height="250">
+<img src="https://user-images.githubusercontent.com/107269455/193426658-dee438f1-f29b-404c-8a72-eeb90b2c14c7.png" width="250" height="250">
+
 
 ### Summary
 
-WellPlay is a social platform connecting you with people in your area to do fitness activities that you enjoy: yoga, tennis, climbing, biking, jogging, and many others. Use search bar to filter users' profiles by their preffered activity, and message each user to discuss logistics of meeting up.
+WellPlay is a social platform connecting you with people in your area to do fitness activities that you enjoy: yoga, tennis, climbing, biking, jogging, and many others. Use the search bar to filter users' profiles by their preferred activity, and message each user to discuss the logistics of meeting up.
 
 ### About the Developer
 
@@ -19,6 +20,8 @@ WellPlay was created by Nataliya Durdyeva. Learn more about the developer on [Li
 ### Features
 
 Create an account with: emails, password, profile photo, name, age, bio, preffered list of sports
+
+<img src="https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif" width="50" height="550">
 
 ![WellPlayGitHub_create_profile](https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif)
 
@@ -37,6 +40,8 @@ The App is going to be on AppStore Shortly available for free download.
 
 ### TODO
 
+- Support device rotation
+- Support Dark Mode
 - Search by users' availability (date and time of the day)
 - Search up and search withing distance radius (kilometers or miles)
 - Advanced filtering by preffered types of sports
