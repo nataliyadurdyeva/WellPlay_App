@@ -21,7 +21,7 @@ WellPlay was created by Nataliya Durdyeva. Learn more about the developer on [Li
 
 Create an account with: emails, password, profile photo, name, age, bio, preffered list of sports
 
-<img src="https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif" width="50" height="550">
+<img src="https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif" width="50" height="100">
 
 ![WellPlayGitHub_create_profile](https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif)
 
