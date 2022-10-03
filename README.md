@@ -36,7 +36,7 @@ See a list of All Conversations and continue chatting by selecting one recent co
 Update your profile in real time:
 
 
-Email support (to report a user, for example):
+Email support (e.g to report a user):
 
 
 
