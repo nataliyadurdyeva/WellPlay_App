@@ -41,12 +41,9 @@ Update your profile in real time:
 
 <img src="https://user-images.githubusercontent.com/107269455/193506188-48b1c54a-1a0b-4fb5-b3dd-f58f8381f119.gif" width="250" height="500">
 
-Email support (e.g to report a user):
+Email support (e.g to report a user), Sign Out or Delete the user (email, password and user data will be deleted from Firebase):
 
-
-
-Sign Out or Delete the user (email, password and user data will be deleted from Firebase):
-
+<img src="https://user-images.githubusercontent.com/107269455/193507318-7ab41b83-50bf-437d-b75a-536d84e22c5c.gif" width="250" height="550">
 
 
 ### Setup/Installation
