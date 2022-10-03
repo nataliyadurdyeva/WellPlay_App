@@ -19,9 +19,11 @@ WellPlay was created by Nataliya Durdyeva. Learn more about the developer on [Li
 
 ### Features
 
-Create an account with: emails, password, profile photo, name, age, bio, preffered list of sports
+Create an account with: emails, password, profile photo, name, age, bio, preffered list of sports:
 
 <img src="https://user-images.githubusercontent.com/107269455/191105169-fa667615-7c8b-4bc9-9d3b-a8bb8b10e81a.gif" width="250" height="500">
+
+
 
 Browse other users in your city and use Search Bar to filter users by their preferred list of sports
 
@@ -32,6 +34,8 @@ Message the selected user to discuss logistics of meeting up
 <img src="https://user-images.githubusercontent.com/107269455/191103525-2626e65c-177a-4553-a7a2-149fa9899838.gif" width="550" height="550">
 
 See a list of All Conversations and continue chatting by selecting one recent conversation:
+
+<img src="https://user-images.githubusercontent.com/107269455/193507010-989d65b4-8406-45fb-b1ed-fa67a9dc2f14.gif" width="550" height="550">
 
 Update your profile in real time:
 
