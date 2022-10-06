@@ -50,6 +50,7 @@ class AppViewModel: NSObject, ObservableObject {
     //MARK: Initializers
     
     override init() {
+    
         super.init()
         tempCurrentUser = nil
         userSession = Auth.auth().currentUser
@@ -163,6 +164,7 @@ class AppViewModel: NSObject, ObservableObject {
     //MARK: Authorization functions
     
     func signIn(email: String, password: String) {
+        
         
         let auth = Auth.auth()
         
