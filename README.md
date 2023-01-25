@@ -52,7 +52,7 @@ Reset password via email:
 
 ### Setup/Installation
 
-The App is going to be on AppStore Shortly available for free download.
+The App is free and can be downloaded from the AppStore: https://apps.apple.com/us/app/wellplay/id6443639402
 
 ### TODO
 
